@@ -85,10 +85,10 @@ const MyTransactions = () => {
               key={txn.id}
               className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
             >
-              {/* Transaction Header */}
+              {/*Header */}
               <div
                 className={`p-4 ${
-                  txn.type === "income"
+                  txn.type === "Income"
                     ? "bg-green-50 border-l-4 border-green-500"
                     : "bg-red-50 border-l-4 border-red-500"
                 }`}
@@ -96,7 +96,7 @@ const MyTransactions = () => {
                 <div className="flex justify-between items-center mb-3">
                   <span
                     className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                      txn.type === "income"
+                      txn.type === "Income"
                         ? "bg-green-100 text-green-800"
                         : "bg-red-100 text-red-800"
                     }`}
@@ -104,12 +104,12 @@ const MyTransactions = () => {
                     {txn.type}
                   </span>
                   <span className="font-mono font-bold text-lg">
-                    {txn.type === "income" ? "+" : "-"}$
+                    {txn.type === "Income" ? "+" : "-"}$
                     {txn.amount.toLocaleString()}
                   </span>
                 </div>
 
-                {/* Transaction Details */}
+                {/* Details */}
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Category:</span>
@@ -124,7 +124,7 @@ const MyTransactions = () => {
                 </div>
               </div>
 
-              {/* Transaction Actions */}
+              
               <div className="p-4 bg-gray-50 flex justify-between gap-2">
                 <button
                   onClick={() => handleViewDetails(txn)}

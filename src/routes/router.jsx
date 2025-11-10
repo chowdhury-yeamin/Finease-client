@@ -10,6 +10,7 @@ import PrivateRoute from "./PrivateRoute";
 import TransactionDetails from "../Pages/TransactionDetails";
 import UpdateTransaction from "../Pages/UpdateTransaction";
 import About from "../Pages/About";
+import MyProfile from "../Pages/MyProfile";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,14 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About></About>
+      },
+      {
+        path: "/my-profile",
+        element: (
+          <PrivateRoute>
+            <MyProfile></MyProfile>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
