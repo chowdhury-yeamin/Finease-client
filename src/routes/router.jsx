@@ -7,6 +7,8 @@ import Reports from "../Pages/Reports";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import PrivateRoute from "./PrivateRoute";
+import TransactionDetails from "../Pages/TransactionDetails";
+import UpdateTransaction from "../Pages/UpdateTransaction";
 
 const router = createBrowserRouter([
   {
@@ -34,12 +36,23 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/my-transactions/:id",
+        element: <TransactionDetails></TransactionDetails>,
+      },
+      {
+        path: "/transaction/update/:id",
+        element:<UpdateTransaction></UpdateTransaction>
+      },
+      {
         path: "/reports",
         element: (
           <PrivateRoute>
             <Reports></Reports>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/about",
       },
       {
         path: "/login",

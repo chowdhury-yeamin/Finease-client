@@ -32,7 +32,6 @@ const Login = () => {
         timer: 1500,
       });
 
-  
       const from = location?.state?.from?.pathname || "/";
       navigate(from, { replace: true });
     } catch (error) {
@@ -51,7 +50,9 @@ const Login = () => {
     signInWithGoogle()
       .then((result) => {
         console.log(result.user);
-        navigate(location?.state || "/");
+        // Navigate to the original page the user was trying to access
+        const from = location?.state?.from?.pathname || "/";
+        navigate(from, { replace: true });
 
         Swal.fire({
           position: "top-end",

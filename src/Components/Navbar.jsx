@@ -8,7 +8,7 @@ const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
 
   const activeClass =
-    "bg-gray-300 px-3 py-2 rounded-2xl transition-colors duration-200";
+    "bg-gray-400 px-3 py-2 rounded-2xl transition-colors duration-200";
   const normalClass =
     "hover:bg-gray-300 px-3 py-2 rounded-2xl transition-colors duration-200";
 
