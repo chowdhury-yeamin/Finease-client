@@ -1,31 +1,50 @@
-import { use } from "react";
+import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const { signInUser, signInWithGoogle } = use(AuthContext);
+  const { signInUser, signInWithGoogle } = useContext(AuthContext);
 
   const location = useLocation();
   const navigate = useNavigate();
   console.log(location);
 
-  const handleLogIn = (event) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleLogIn = async (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-    console.log(email, password);
-    signInUser(email, password)
-      .then((result) => {
-        console.log(result.user);
-        event.target.reset();
-        navigate(location.state || "/");
-      })
-      .catch((error) => {
-        console.log(error);
+    try {
+      setIsLoading(true);
+      const result = await signInUser(email, password);
+      console.log(result.user);
+      event.target.reset();
+
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Successfully logged in!",
+        showConfirmButton: false,
+        timer: 1500,
       });
+
+  
+      const from = location?.state?.from?.pathname || "/";
+      navigate(from, { replace: true });
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: error.message || "Something went wrong!",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleGoogleSignIn = () => {
@@ -76,8 +95,15 @@ const Login = () => {
             <div>
               <a className="link link-hover">Forgot password?</a>
             </div>
-            <button className="btn text-white mt-4 rounded-full bg-blue-600 hover:bg-blue-800">
-              Login
+            <button
+              disabled={isLoading}
+              className="btn text-white mt-4 rounded-full bg-blue-600 hover:bg-blue-800"
+            >
+              {isLoading ? (
+                <span className="loading loading-spinner loading-sm"></span>
+              ) : (
+                "Login"
+              )}
             </button>
           </fieldset>
         </form>
