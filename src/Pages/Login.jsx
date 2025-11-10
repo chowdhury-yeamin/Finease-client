@@ -50,7 +50,6 @@ const Login = () => {
     signInWithGoogle()
       .then((result) => {
         console.log(result.user);
-        // Navigate to the original page the user was trying to access
         const from = location?.state?.from?.pathname || "/";
         navigate(from, { replace: true });
 

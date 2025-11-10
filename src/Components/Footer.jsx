@@ -11,7 +11,7 @@ const Footer = () => {
           <img src={img1} alt="FinEase Logo" className="w-14 h-14 mb-2" />
           <h2 className="text-2xl font-bold text-blue-600">FinEase</h2>
           <p className="text-gray-500 mt-2">
-            Simplify your personal finance management with ease.
+            Simplify your personal finance management with FinEase.
           </p>
         </div>
 

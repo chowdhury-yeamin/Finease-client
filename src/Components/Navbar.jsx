@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router"; 
+import { NavLink, Link } from "react-router";
 import img1 from "../assets/FinEase-Logo.png";
 import { AuthContext } from "../Context/AuthContext";
-
+import { FaUser, FaGear } from "react-icons/fa6";
+import { IoLogIn, IoLogOut } from "react-icons/io5";
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
@@ -44,27 +45,43 @@ const Navbar = () => {
               >
                 <NavLink
                   to="/"
-                  className={({ isActive }) => (isActive ? activeClass : normalClass)}
+                  className={({ isActive }) =>
+                    isActive ? activeClass : normalClass
+                  }
                 >
                   Home
                 </NavLink>
                 <NavLink
                   to="/add-transaction"
-                  className={({ isActive }) => (isActive ? activeClass : normalClass)}
+                  className={({ isActive }) =>
+                    isActive ? activeClass : normalClass
+                  }
                 >
                   Add Transaction
                 </NavLink>
                 <NavLink
                   to="/my-transactions"
-                  className={({ isActive }) => (isActive ? activeClass : normalClass)}
+                  className={({ isActive }) =>
+                    isActive ? activeClass : normalClass
+                  }
                 >
                   My Transactions
                 </NavLink>
                 <NavLink
                   to="/reports"
-                  className={({ isActive }) => (isActive ? activeClass : normalClass)}
+                  className={({ isActive }) =>
+                    isActive ? activeClass : normalClass
+                  }
                 >
                   Reports
+                </NavLink>
+                <NavLink
+                  to="/about"
+                  className={({ isActive }) =>
+                    isActive ? activeClass : normalClass
+                  }
+                >
+                  About
                 </NavLink>
               </ul>
             </div>
@@ -78,61 +95,105 @@ const Navbar = () => {
             <ul className="menu menu-horizontal px-1 gap-4">
               <NavLink
                 to="/"
-                className={({ isActive }) => (isActive ? activeClass : normalClass)}
+                className={({ isActive }) =>
+                  isActive ? activeClass : normalClass
+                }
               >
                 Home
               </NavLink>
               <NavLink
                 to="/add-transaction"
-                className={({ isActive }) => (isActive ? activeClass : normalClass)}
+                className={({ isActive }) =>
+                  isActive ? activeClass : normalClass
+                }
               >
                 Add Transaction
               </NavLink>
               <NavLink
                 to="/my-transactions"
-                className={({ isActive }) => (isActive ? activeClass : normalClass)}
+                className={({ isActive }) =>
+                  isActive ? activeClass : normalClass
+                }
               >
                 My Transactions
               </NavLink>
               <NavLink
                 to="/reports"
-                className={({ isActive }) => (isActive ? activeClass : normalClass)}
+                className={({ isActive }) =>
+                  isActive ? activeClass : normalClass
+                }
               >
                 Reports
+              </NavLink>
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  isActive ? activeClass : normalClass
+                }
+              >
+                About
               </NavLink>
             </ul>
           </div>
 
-          <div className="navbar-end">
+          <div className="navbar-end gap-3">
             {user ? (
-              <div className="flex items-center gap-2">
-                {user.photoURL ? (
-                  <img
-                    src={user.photoURL}
-                    alt="Profile"
-                    className="w-10 h-10 rounded-full border-2 border-gray-300"
-                  />
-                ) : (
-                  <div className="w-10 h-10 rounded-full bg-gray-400 flex items-center justify-center text-white">
-                    {user.displayName ? user.displayName[0].toUpperCase() : "U"}
+              <>
+                <div className="dropdown dropdown-end z-50">
+                  <div
+                    tabIndex={0}
+                    role="button"
+                    className="btn btn-ghost btn-circle avatar"
+                  >
+                    <div className="w-9 border-2 border-gray-300 rounded-full">
+                      <img
+                        alt="User avatar"
+                        referrerPolicy="no-referrer"
+                        src={
+                          user.photoURL ||
+                          `https://ui-avatars.com/api/?name=${
+                            user.displayName || "U"
+                          }&background=random`
+                        }
+                      />
+                    </div>
                   </div>
-                )}
+                  <ul
+                    tabIndex="-1"
+                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow"
+                  >
+                    <div className="pb-3 border-b border-b-gray-200">
+                      <li className="text-sm font-bold">
+                        {user.displayName || "User"}
+                      </li>
+                      <li className="text-xs">{user.email}</li>
+                    </div>
+                    <li className="mt-3">
+                      <Link to="/my-transactions">
+                        <FaUser /> My Transactions
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/reports">
+                        <FaGear /> Reports
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
                 <button
                   onClick={signOutUser}
-                  className="btn btn-outline ml-2"
+                  className="btn btn-outline hover:bg-gray-400  gap-2"
                 >
-                  Logout
+                  <IoLogOut /> Logout
                 </button>
-              </div>
-            ) : (
-              <>
-                <NavLink to="/login" className="btn btn-outline ml-2">
-                  Login
-                </NavLink>
-                <NavLink to="/register" className="btn btn-outline ml-2">
-                  Register
-                </NavLink>
               </>
+            ) : (
+              <Link
+                to="/login"
+                className="btn btn-outline hover:bg-gray-400  gap-2"
+              >
+                <IoLogIn /> Login
+              </Link>
             )}
           </div>
         </div>
