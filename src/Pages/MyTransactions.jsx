@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import Swal from "sweetalert2";
+import { Link } from "react-router";
 
 const MyTransactions = () => {
   const { user } = useContext(AuthContext);
@@ -13,9 +14,13 @@ const MyTransactions = () => {
         setLoading(true);
         const response = await fetch("http://localhost:3000/transactions");
         const data = await response.json();
-        setTransactions(data);
+        const userTransactions = data.filter(
+          (txn) => txn.userEmail?.toLowerCase() === user?.email?.toLowerCase()
+        );
+        setTransactions(userTransactions);
       } catch (err) {
         console.error("Failed to fetch transactions:", err);
+        setTransactions([]);
       } finally {
         setLoading(false);
       }
@@ -23,17 +28,18 @@ const MyTransactions = () => {
 
     if (user?.email) {
       loadTransactions();
+    } else {
+      setTransactions([]);
+      setLoading(false);
     }
   }, [user]);
 
-  // Handle update
   const handleUpdate = (id) => {
     console.log("Update transaction:", id);
   };
 
-  // Handle delete
   const handleDelete = async (id) => {
-    const confirmDelete = Swal.fire({
+    const confirmDelete = await Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
       icon: "warning",
@@ -41,21 +47,18 @@ const MyTransactions = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
-        });
-      }
     });
-    if (confirmDelete) {
+
+    if (confirmDelete.isConfirmed) {
+      Swal.fire({
+        title: "Deleted!",
+        text: "Your transaction has been deleted.",
+        icon: "success",
+      });
       console.log("Deleted transaction:", id);
     }
   };
 
-  // Handle view details
   const handleViewDetails = (transaction) => {
     console.log("Transaction details:", transaction);
   };
@@ -82,10 +85,9 @@ const MyTransactions = () => {
         <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {transactions.map((txn) => (
             <div
-              key={txn.id}
+              key={txn._id}
               className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
             >
-              {/*Header */}
               <div
                 className={`p-4 ${
                   txn.type === "Income"
@@ -109,7 +111,6 @@ const MyTransactions = () => {
                   </span>
                 </div>
 
-                {/* Details */}
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Category:</span>
@@ -124,22 +125,28 @@ const MyTransactions = () => {
                 </div>
               </div>
 
-              
               <div className="p-4 bg-gray-50 flex justify-between gap-2">
-                <button
+                <Link
+                  to={`/my-transactions/${txn._id}`}
                   onClick={() => handleViewDetails(txn)}
+                  state={{
+                    transaction: txn,
+                    categoryTotal: transactions
+                      .filter((t) => t.category === txn.category)
+                      .reduce((s, i) => s + Number(i.amount || 0), 0),
+                  }}
                   className="flex-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
                 >
                   View Details
-                </button>
+                </Link>
                 <button
-                  onClick={() => handleUpdate(txn.id)}
+                  onClick={() => handleUpdate(txn._id)}
                   className="flex-1 px-3 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition"
                 >
                   Update
                 </button>
                 <button
-                  onClick={() => handleDelete(txn.id)}
+                  onClick={() => handleDelete(txn._id)}
                   className="flex-1 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
                 >
                   Delete
