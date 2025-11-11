@@ -3,7 +3,8 @@ import { NavLink, Link } from "react-router";
 import img1 from "../assets/FinEase-Logo.png";
 import { AuthContext } from "../Context/AuthContext";
 import { FaUser, FaGear } from "react-icons/fa6";
-import { IoLogIn, IoLogOut } from "react-icons/io5";
+import { IoMdLogIn } from "react-icons/io";
+import { BiLogOutCircle } from "react-icons/bi";
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
@@ -133,6 +134,16 @@ const Navbar = () => {
               >
                 About
               </NavLink>
+              {user && (
+                <NavLink
+                  to="/my-profile"
+                  className={({ isActive }) =>
+                    isActive ? activeClass : normalClass
+                  }
+                >
+                  My Profile
+                </NavLink>
+              )}
             </ul>
           </div>
 
@@ -149,12 +160,7 @@ const Navbar = () => {
                       <img
                         alt="User avatar"
                         referrerPolicy="no-referrer"
-                        src={
-                          user.photoURL ||
-                          `https://ui-avatars.com/api/?name=${
-                            user.displayName || "U"
-                          }&background=random`
-                        }
+                        src={user.photoURL}
                       />
                     </div>
                   </div>
@@ -184,7 +190,7 @@ const Navbar = () => {
                   onClick={signOutUser}
                   className="btn btn-outline hover:bg-gray-400  gap-2"
                 >
-                  <IoLogOut /> Logout
+                  <BiLogOutCircle /> Logout
                 </button>
               </>
             ) : (
@@ -192,7 +198,7 @@ const Navbar = () => {
                 to="/login"
                 className="btn btn-outline hover:bg-gray-400  gap-2"
               >
-                <IoLogIn /> Login
+                <IoMdLogIn /> Login
               </Link>
             )}
           </div>

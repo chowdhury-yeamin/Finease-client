@@ -1,28 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import img1 from "../assets/FinEase-Logo.png";
 import { NavLink } from "react-router";
+import { AuthContext } from "../Context/AuthContext";
+import CountUp from "../Components/CountUp";
 
 const Home = () => {
+  const { user } = useContext(AuthContext);
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchTransactions = async () => {
-      setLoading(true);
       try {
+        setLoading(true);
         const res = await fetch("http://localhost:3000/transactions");
         const data = await res.json();
-        setTransactions(Array.isArray(data) ? data : []);
-      } catch (err) {
-        console.error("Failed to load transactions:", err);
+        const userData = data.filter(
+          (item) => item.userEmail?.toLowerCase() === user?.email?.toLowerCase()
+        );
+        setTransactions(userData);
+      } catch (error) {
+        console.log("Error loading transactions:", error);
         setTransactions([]);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchTransactions();
-  }, []);
+    if (user?.email) {
+      fetchTransactions();
+    } else {
+      setTransactions([]);
+      setLoading(false);
+    }
+  }, [user]);
 
   const totalIncome = transactions
     .filter((t) => String(t.type).toLowerCase() === "income")
@@ -50,7 +61,7 @@ const Home = () => {
 
             <div className="flex flex-wrap gap-3">
               <NavLink
-                to="/login"
+                to="/add-transaction"
                 className="px-5 py-2 bg-yellow-400 text-blue-900 font-semibold rounded-lg shadow hover:bg-yellow-300 transition transform hover:-translate-y-0.5 hover:scale-[1.01] duration-200"
               >
                 Get Started
@@ -80,30 +91,48 @@ const Home = () => {
           Overview
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 text-center">
+          <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
             <div className="text-3xl mb-2">💰</div>
             <h4 className="text-gray-500 text-sm">Total Balance</h4>
             <p className="text-2xl font-bold text-blue-600 mt-2">
-              ${(balance || 0)}
+              <CountUp
+                from={0}
+                to={balance || 0}
+                direction="up"
+                duration={1}
+                className="text-blue-600"
+              />
             </p>
             <p className="text-xs text-gray-500 mt-1">
               {loading ? "Loading..." : `${transactions.length} transactions`}
             </p>
           </div>
 
-          <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 text-center">
+          <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
             <div className="text-3xl mb-2">📈</div>
             <h4 className="text-gray-500 text-sm">Total Income</h4>
             <p className="text-2xl font-bold text-green-600 mt-2">
-              ${(totalIncome || 0)}
+              <CountUp
+                from={0}
+                to={totalIncome || 0}
+                direction="up"
+                duration={1}
+                className="text-green-600"
+              />
             </p>
           </div>
 
-          <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 text-center">
+          <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-lg">
             <div className="text-3xl mb-2">📉</div>
             <h4 className="text-gray-500 text-sm">Total Expenses</h4>
             <p className="text-2xl font-bold text-red-600 mt-2">
-              ${(totalExpenses || 0)}
+              <CountUp
+                from={0}
+                to={totalExpenses || 0}
+                direction="up"
+                duration={1}
+                className="text-red-600"
+              />
             </p>
           </div>
         </div>

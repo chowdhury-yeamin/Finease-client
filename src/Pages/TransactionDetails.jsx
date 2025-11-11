@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router";
 import { FaArrowLeft } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const TransactionDetails = () => {
   const location = useLocation();
@@ -27,7 +28,13 @@ const TransactionDetails = () => {
           setTransaction(data.transaction);
           setCategoryTotal(data.categoryTotal ?? 0);
         } catch (err) {
-          setError(err.message);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+            footer: err.message,
+          });
+          console.error(setError(err.message));
         } finally {
           setLoading(false);
         }
@@ -38,16 +45,6 @@ const TransactionDetails = () => {
     }
   }, [id, location.state]);
 
-  const fmt = (n) => {
-    try {
-      return Number(n).toLocaleString(undefined, {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      });
-    } catch {
-      return n;
-    }
-  };
 
   if (loading) return <div className="p-6 text-center">Loading...</div>;
   if (error) return <div className="p-6 text-center text-red-600">{error}</div>;
@@ -93,7 +90,7 @@ const TransactionDetails = () => {
                   : "text-green-600"
               }`}
             >
-              ${fmt(amount)}
+              ${amount}
             </div>
           </div>
 
@@ -112,7 +109,7 @@ const TransactionDetails = () => {
           <div className="text-xs text-gray-500">
             Total amount for category "{category}"
           </div>
-          <div className="mt-1 font-semibold">${fmt(categoryTotal)}</div>
+          <div className="mt-1 font-semibold">${categoryTotal}</div>
         </div>
       </div>
     </div>

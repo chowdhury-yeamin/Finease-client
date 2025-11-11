@@ -9,17 +9,17 @@ const MyTransactions = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadTransactions = async () => {
+    const fetchTransactions = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:3000/transactions");
-        const data = await response.json();
-        const userTransactions = data.filter(
-          (txn) => txn.userEmail?.toLowerCase() === user?.email?.toLowerCase()
+        const res = await fetch("http://localhost:3000/transactions");
+        const data = await res.json();
+        const userData = data.filter(
+          (item) => item.userEmail?.toLowerCase() === user?.email?.toLowerCase()
         );
-        setTransactions(userTransactions);
-      } catch (err) {
-        console.error("Failed to fetch transactions:", err);
+        setTransactions(userData);
+      } catch (error) {
+        console.log("Error loading transactions:", error);
         setTransactions([]);
       } finally {
         setLoading(false);
@@ -27,7 +27,7 @@ const MyTransactions = () => {
     };
 
     if (user?.email) {
-      loadTransactions();
+      fetchTransactions();
     } else {
       setTransactions([]);
       setLoading(false);
@@ -41,7 +41,7 @@ const MyTransactions = () => {
   const handleDelete = async (id) => {
     const confirmDelete = await Swal.fire({
       title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      text: "This transaction will be permanently deleted!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -50,12 +50,34 @@ const MyTransactions = () => {
     });
 
     if (confirmDelete.isConfirmed) {
-      Swal.fire({
-        title: "Deleted!",
-        text: "Your transaction has been deleted.",
-        icon: "success",
-      });
-      console.log("Deleted transaction:", id);
+      try {
+        const res = await fetch(`http://localhost:3000/transactions/${id}`, {
+          method: "DELETE",
+          
+        });
+
+        if (res.ok) {
+          setTransactions((prev) => prev.filter((txn) => txn._id !== id));
+          Swal.fire({
+            title: "Deleted!",
+            text: "Transaction deleted successfully.",
+            icon: "success",
+          });
+        } else {
+          Swal.fire({
+            title: "Error!",
+            text: "Failed to delete transaction.",
+            icon: "error",
+          });
+        }
+      } catch (error) {
+        Swal.fire({
+          title: "Error!",
+          text: "Something went wrong.",
+          icon: "error",
+        });
+        console.log("Error deleting transaction:", error);
+      }
     }
   };
 
@@ -133,7 +155,7 @@ const MyTransactions = () => {
                     transaction: txn,
                     categoryTotal: transactions
                       .filter((t) => t.category === txn.category)
-                      .reduce((s, i) => s + Number(i.amount || 0), 0),
+                      .reduce((sum, item) => sum + Number(item.amount || 0), 0),
                   }}
                   className="flex-1 px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
                 >
