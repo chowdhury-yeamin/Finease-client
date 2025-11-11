@@ -1,8 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import img1 from "../assets/FinEase-Logo.png";
 import { NavLink } from "react-router";
 
 const Home = () => {
+  const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch("http://localhost:3000/transactions");
+        const data = await res.json();
+        setTransactions(Array.isArray(data) ? data : []);
+      } catch (err) {
+        console.error("Failed to load transactions:", err);
+        setTransactions([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTransactions();
+  }, []);
+
+  const totalIncome = transactions
+    .filter((t) => String(t.type).toLowerCase() === "income")
+    .reduce((sum, t) => sum + Number(t.amount || 0), 0);
+
+  const totalExpenses = transactions
+    .filter((t) => String(t.type).toLowerCase() === "expense")
+    .reduce((sum, t) => sum + Number(t.amount || 0), 0);
+
+  const balance = totalIncome - totalExpenses;
+
   return (
     <main className="flex-grow">
       <section className="banner relative bg-linear-to-br from-blue-600 via-indigo-500 to-purple-600 text-white py-16">
@@ -49,22 +80,31 @@ const Home = () => {
           Overview
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+          <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 text-center">
             <div className="text-3xl mb-2">💰</div>
             <h4 className="text-gray-500 text-sm">Total Balance</h4>
-            <p className="text-2xl font-bold text-blue-600 mt-2">$12,450</p>
+            <p className="text-2xl font-bold text-blue-600 mt-2">
+              ${(balance || 0)}
+            </p>
+            <p className="text-xs text-gray-500 mt-1">
+              {loading ? "Loading..." : `${transactions.length} transactions`}
+            </p>
           </div>
 
-          <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+          <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 text-center">
             <div className="text-3xl mb-2">📈</div>
             <h4 className="text-gray-500 text-sm">Total Income</h4>
-            <p className="text-2xl font-bold text-green-600 mt-2">$8,200</p>
+            <p className="text-2xl font-bold text-green-600 mt-2">
+              ${(totalIncome || 0)}
+            </p>
           </div>
 
-          <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 text-center transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+          <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 text-center">
             <div className="text-3xl mb-2">📉</div>
             <h4 className="text-gray-500 text-sm">Total Expenses</h4>
-            <p className="text-2xl font-bold text-red-600 mt-2">$3,500</p>
+            <p className="text-2xl font-bold text-red-600 mt-2">
+              ${(totalExpenses || 0)}
+            </p>
           </div>
         </div>
       </section>
