@@ -46,9 +46,15 @@ const Reports = () => {
   }, [user]);
 
   //  Colors
-  const COLORS = ["#4F46E5", "#06B6D4", "#F59E0B", "#EF4444", "#10B981", "#6366F1"];
+  const COLORS = [
+    "#4F46E5",
+    "#06B6D4",
+    "#F59E0B",
+    "#EF4444",
+    "#10B981",
+    "#6366F1",
+  ];
 
- 
   const expenseTransactions = transactions.filter(
     (t) => String(t.type).toLowerCase() === "expense"
   );
@@ -56,14 +62,14 @@ const Reports = () => {
   const categoryMap = {};
   expenseTransactions.forEach((t) => {
     const category = t.category || "Other";
-    categoryMap[category] = (categoryMap[category] || 0) + Number(t.amount || 0);
+    categoryMap[category] =
+      (categoryMap[category] || 0) + Number(t.amount || 0);
   });
 
   const categoryData = Object.keys(categoryMap).map((key) => ({
     name: key,
     value: categoryMap[key],
   }));
-
 
   const monthMap = {};
   transactions.forEach((t) => {
@@ -80,16 +86,20 @@ const Reports = () => {
   }));
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 py-12 px-6">
+    <main className=" py-12 px-6">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600 mb-10">
           Financial Reports
         </h1>
 
         {loading ? (
-          <p className="text-center text-gray-600"><span className="loading loading-spinner loading-xl"></span></p>
+          <p className="text-center text-gray-600">
+            <span className="loading loading-spinner loading-xl"></span>
+          </p>
         ) : transactions.length === 0 ? (
-          <p className="text-center text-gray-600">No transactions to display yet.</p>
+          <p className="text-center text-gray-600">
+            No transactions to display yet.
+          </p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div className="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
@@ -118,7 +128,6 @@ const Reports = () => {
                 </PieChart>
               </ResponsiveContainer>
             </div>
-
 
             <div className="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
               <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">

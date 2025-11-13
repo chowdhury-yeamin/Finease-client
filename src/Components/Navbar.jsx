@@ -5,9 +5,11 @@ import { AuthContext } from "../Context/AuthContext";
 import { FaUser, FaGear } from "react-icons/fa6";
 import { IoMdLogIn } from "react-icons/io";
 import { BiLogOutCircle } from "react-icons/bi";
+import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
-  const { user, signOutUser } = useContext(AuthContext);
+  const { user, signOutUser, isDarkMode, toggleDarkMode } =
+    useContext(AuthContext);
 
   const activeClass =
     "bg-gray-400 px-3 py-2 rounded-2xl transition-colors duration-200";
@@ -146,6 +148,10 @@ const Navbar = () => {
               )}
             </ul>
           </div>
+          <ThemeToggle
+            toggleDarkMode={toggleDarkMode}
+            isDarkMode={isDarkMode}
+          />
 
           <div className="navbar-end gap-3">
             {user ? (
@@ -174,7 +180,7 @@ const Navbar = () => {
                       </li>
                       <li className="text-xs">{user.email}</li>
                     </div>
-                     <li className="mt-3">
+                    <li className="mt-3">
                       <Link to="/my-profile">
                         <FaUser /> My Profile
                       </Link>
