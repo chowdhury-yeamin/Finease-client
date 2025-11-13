@@ -54,7 +54,6 @@ const EditProfile = () => {
         </h2>
 
         <form onSubmit={handleUpdateProfile} className="space-y-6">
-         
           <div>
             <label className="block text-gray-700 font-medium mb-2">
               Full Name
@@ -82,7 +81,6 @@ const EditProfile = () => {
             />
           </div>
 
-         
           {photoURL && (
             <div className="flex justify-center mt-4">
               <img
@@ -96,6 +94,7 @@ const EditProfile = () => {
           {/* Buttons */}
           <div className="flex justify-between items-center mt-8">
             <button
+              href="/"
               type="button"
               onClick={() => navigate("/profile")}
               className="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition"
