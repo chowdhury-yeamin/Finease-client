@@ -15,7 +15,7 @@ const MyTransactions = () => {
       try {
         setLoading(true);
         const res = await fetch(
-          `http://localhost:3000/transactions?sortBy=${sortBy}&order=${order}`
+          `https://fin-ease-server-jade.vercel.app/transactions?sortBy=${sortBy}&order=${order}`
         );
         const data = await res.json();
         const userData = data.filter(
@@ -55,7 +55,7 @@ const MyTransactions = () => {
 
     if (confirmDelete.isConfirmed) {
       try {
-        const res = await fetch(`http://localhost:3000/transactions/${id}`, {
+        const res = await fetch(`https://fin-ease-server-jade.vercel.app/transactions/${id}`, {
           method: "DELETE",
         });
 

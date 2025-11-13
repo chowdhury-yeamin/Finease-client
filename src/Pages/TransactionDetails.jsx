@@ -22,7 +22,7 @@ const TransactionDetails = () => {
         try {
           setLoading(true);
           const response = await fetch(
-            `http://localhost:3000/transactions/${id}`
+            `https://fin-ease-server-jade.vercel.app/transactions/${id}`
           );
           const data = await response.json();
           setTransaction(data.transaction);

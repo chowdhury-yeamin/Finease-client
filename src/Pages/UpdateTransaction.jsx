@@ -36,7 +36,7 @@ const UpdateTransaction = () => {
   useEffect(() => {
     const fetchTransaction = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/transactions/${id}`);
+        const res = await fetch(`https://fin-ease-server-jade.vercel.app/transactions/${id}`);
         const data = await res.json();
         setFormData({
           type: data.type,
@@ -78,7 +78,7 @@ const UpdateTransaction = () => {
       userName: user?.displayName,
     };
 
-    fetch(`http://localhost:3000/transactions/${id}`, {
+    fetch(`https://fin-ease-server-jade.vercel.app/transactions/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -46,7 +46,7 @@ const AddTransaction = () => {
       created_at: new Date().toISOString(),
     };
     
-    fetch("http://localhost:3000/transactions", {
+    fetch("https://fin-ease-server-jade.vercel.app/transactions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

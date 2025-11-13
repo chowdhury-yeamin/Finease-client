@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
-import { Mail, Edit3, User } from "lucide-react"; // icons
+import { Mail, Edit3, User } from "lucide-react"; 
+import { Link } from "react-router";
 
 const MyProfile = () => {
   const { user } = useContext(AuthContext);
@@ -18,9 +19,6 @@ const MyProfile = () => {
           <h2 className="text-2xl font-bold mb-1">{user?.displayName || "User Name"}</h2>
           <p className="text-blue-100 text-sm mb-6">{user?.email || "example@email.com"}</p>
 
-          <button className="flex items-center gap-2 bg-white text-blue-700 font-semibold px-6 py-2 rounded-full shadow-md hover:bg-blue-50 transition-all duration-300">
-            <Edit3 className="w-4 h-4" /> Edit Profile
-          </button>
         </div>
 
         {/* Profile Info Section */}
@@ -54,9 +52,9 @@ const MyProfile = () => {
           </div>
 
           <div className="mt-10">
-            <button className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-md hover:from-blue-700 hover:to-indigo-700 transition-all duration-300">
+            <Link to="/edit-profile" className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-md hover:from-blue-700 hover:to-indigo-700 transition-all duration-300">
               Manage Account
-            </button>
+            </Link>
           </div>
         </div>
       </div>

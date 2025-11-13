@@ -23,7 +23,7 @@ const Reports = () => {
     const fetchTransactions = async () => {
       try {
         setLoading(true);
-        const res = await fetch("http://localhost:3000/transactions");
+        const res = await fetch("https://fin-ease-server-jade.vercel.app/transactions");
         const data = await res.json();
 
         const userData = data.filter(
