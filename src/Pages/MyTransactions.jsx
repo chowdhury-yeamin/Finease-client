@@ -7,12 +7,16 @@ const MyTransactions = () => {
   const { user } = useContext(AuthContext);
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [sortBy, setSortBy] = useState("date");
+  const [order, setOrder] = useState("desc");
 
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
         setLoading(true);
-        const res = await fetch("http://localhost:3000/transactions");
+        const res = await fetch(
+          `http://localhost:3000/transactions?sortBy=${sortBy}&order=${order}`
+        );
         const data = await res.json();
         const userData = data.filter(
           (item) => item.userEmail?.toLowerCase() === user?.email?.toLowerCase()
@@ -32,7 +36,7 @@ const MyTransactions = () => {
       setTransactions([]);
       setLoading(false);
     }
-  }, [user]);
+  }, [user, sortBy, order]);
 
   const handleUpdate = (id) => {
     console.log("Update transaction:", id);
@@ -97,6 +101,28 @@ const MyTransactions = () => {
       <h1 className="text-3xl font-bold text-center mb-8 text-blue-600">
         My Transactions
       </h1>
+
+      {/* Sorting Controls */}
+      <div className="flex gap-4 mb-6 items-center justify-center">
+        <label className="font-semibold">Sort by:</label>
+        <select
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+          className="p-2 border rounded"
+        >
+          <option value="date">Date</option>
+          <option value="amount">Amount</option>
+        </select>
+
+        <select
+          value={order}
+          onChange={(e) => setOrder(e.target.value)}
+          className="p-2 border rounded"
+        >
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+      </div>
 
       {transactions.length === 0 ? (
         <div className="text-center py-10">
