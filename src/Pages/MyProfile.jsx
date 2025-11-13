@@ -1,46 +1,63 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
+import { Mail, Edit3, User } from "lucide-react"; // icons
 
 const MyProfile = () => {
   const { user } = useContext(AuthContext);
 
   return (
-    <div className=" ">
-      <h1 className="text-center text-4xl md:text-5xl text-blue-600 font-bold mt-5">
-        My Profile
-      </h1>
-
-      <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mt-10 max-w-5xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-lg p-6 py-10 flex flex-col justify-center items-center w-full md:w-1/3 hover:shadow-2xl transition-shadow duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-blue-100 p-8 flex items-center justify-center">
+      <div className="bg-white/90 backdrop-blur-md shadow-2xl rounded-3xl overflow-hidden flex flex-col md:flex-row max-w-6xl w-full">
+        {/* Sidebar Card */}
+        <div className="bg-gradient-to-b from-blue-600 to-indigo-700 text-white flex flex-col items-center justify-center p-10 w-full md:w-1/3">
           <img
             src={user?.photoURL}
             alt={user?.displayName}
-            className="rounded-full w-40 h-40 object-cover border-4 border-blue-400"
+            className="rounded-full w-40 h-40 object-cover border-4 border-white shadow-lg mb-6 hover:scale-105 transition-transform duration-300"
           />
-          <p className="text-lg font-medium mb-4 text-gray-800">
-            {user?.displayName || "N/A"}
-          </p>
+          <h2 className="text-2xl font-bold mb-1">{user?.displayName || "User Name"}</h2>
+          <p className="text-blue-100 text-sm mb-6">{user?.email || "example@email.com"}</p>
+
+          <button className="flex items-center gap-2 bg-white text-blue-700 font-semibold px-6 py-2 rounded-full shadow-md hover:bg-blue-50 transition-all duration-300">
+            <Edit3 className="w-4 h-4" /> Edit Profile
+          </button>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-lg p-8 flex-1 w-full md:w-2/3 hover:shadow-2xl transition-shadow duration-300">
-          <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-gray-800">
-            {user?.displayName || "N/A"}
-          </h2>
+        {/* Profile Info Section */}
+        <div className="flex-1 p-10 bg-white">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+            <User className="w-8 h-8 text-blue-600" /> Account Information
+          </h1>
 
-          <div className="space-y-3 text-gray-700">
-            <p className="text-lg">
-              <span className="font-bold text-gray-800">Email:</span>{" "}
-              {user?.email || "N/A"}
-            </p>
-            <p className="text-lg break-words">
-              <span className="font-bold text-gray-800">Photo URL:</span>{" "}
-              {user?.photoURL || "N/A"}
-            </p>
+          <div className="space-y-6">
+            <div>
+              <p className="text-gray-500 uppercase text-sm font-semibold mb-1">Full Name</p>
+              <p className="text-xl font-medium text-gray-800 border-b border-gray-200 pb-2">
+                {user?.displayName || "N/A"}
+              </p>
+            </div>
+
+            <div>
+              <p className="text-gray-500 uppercase text-sm font-semibold mb-1">Email Address</p>
+              <p className="text-xl font-medium text-gray-800 flex items-center gap-2 border-b border-gray-200 pb-2">
+                <Mail className="w-5 h-5 text-blue-600" />
+                {user?.email || "N/A"}
+              </p>
+            </div>
+
+            <div>
+              <p className="text-gray-500 uppercase text-sm font-semibold mb-1">Photo URL</p>
+              <p className="text-sm text-gray-700 break-all border-b border-gray-200 pb-2">
+                {user?.photoURL || "N/A"}
+              </p>
+            </div>
           </div>
 
-          <button className="mt-6 px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300">
-            Edit Profile
-          </button>
+          <div className="mt-10">
+            <button className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-md hover:from-blue-700 hover:to-indigo-700 transition-all duration-300">
+              Manage Account
+            </button>
+          </div>
         </div>
       </div>
     </div>

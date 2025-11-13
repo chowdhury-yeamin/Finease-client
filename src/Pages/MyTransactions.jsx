@@ -53,7 +53,7 @@ const MyTransactions = () => {
       try {
         const res = await fetch(`http://localhost:3000/transactions/${id}`, {
           method: "DELETE",
-          
+
         });
 
         if (res.ok) {
@@ -161,13 +161,14 @@ const MyTransactions = () => {
                 >
                   View Details
                 </Link>
-                <button
+                <Link
                   onClick={() => handleUpdate(txn._id)}
                   className="flex-1 px-3 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition"
                 >
                   Update
-                </button>
+                </Link>
                 <button
+                
                   onClick={() => handleDelete(txn._id)}
                   className="flex-1 px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
                 >

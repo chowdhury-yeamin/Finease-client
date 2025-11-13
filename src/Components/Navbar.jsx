@@ -174,6 +174,11 @@ const Navbar = () => {
                       </li>
                       <li className="text-xs">{user.email}</li>
                     </div>
+                     <li className="mt-3">
+                      <Link to="/my-profile">
+                        <FaUser /> My Profile
+                      </Link>
+                    </li>
                     <li className="mt-3">
                       <Link to="/my-transactions">
                         <FaUser /> My Transactions
