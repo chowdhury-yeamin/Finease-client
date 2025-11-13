@@ -152,7 +152,7 @@ const MyTransactions = () => {
                   >
                     {txn.type}
                   </span>
-                  <span className="font-mono font-bold text-lg">
+                  <span className="font-mono font-bold text-lg text-gray-600">
                     {txn.type === "Income" ? "+" : "-"}$
                     {txn.amount.toLocaleString()}
                   </span>
@@ -161,11 +161,11 @@ const MyTransactions = () => {
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Category:</span>
-                    <span className="font-medium">{txn.category}</span>
+                    <span className="font-medium text-gray-400">{txn.category}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-600">Date:</span>
-                    <span className="font-medium">
+                    <span className="font-medium text-gray-400">
                       {new Date(txn.date).toLocaleDateString()}
                     </span>
                   </div>
