@@ -11,11 +11,13 @@ import TransactionDetails from "../Pages/TransactionDetails";
 import UpdateTransaction from "../Pages/UpdateTransaction";
 import About from "../Pages/About";
 import MyProfile from "../Pages/MyProfile";
+import ErrorPage from "../Pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         index: true,
@@ -43,7 +45,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/transaction/update/:id",
-        element:<UpdateTransaction></UpdateTransaction>
+        element: <UpdateTransaction></UpdateTransaction>,
       },
       {
         path: "/reports",
@@ -55,7 +57,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/about",
-        element: <About></About>
+        element: <About></About>,
       },
       {
         path: "/my-profile",

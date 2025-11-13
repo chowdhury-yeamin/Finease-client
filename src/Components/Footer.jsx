@@ -4,7 +4,7 @@ import img1 from "../assets/FinEase-Logo.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 mt-10">
+    <footer className="border-t-1 mt-10">
       <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Left Section - Logo & Name */}
         <div className="flex flex-col items-center md:items-start text-center md:text-left">

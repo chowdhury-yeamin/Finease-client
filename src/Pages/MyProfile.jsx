@@ -6,7 +6,7 @@ const MyProfile = () => {
   const { user } = useContext(AuthContext);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-blue-100 p-8 flex items-center justify-center">
+    <div className="min-h-screen  p-8 flex items-center justify-center">
       <div className="bg-white/90 backdrop-blur-md shadow-2xl rounded-3xl overflow-hidden flex flex-col md:flex-row max-w-6xl w-full">
         {/* Sidebar Card */}
         <div className="bg-gradient-to-b from-blue-600 to-indigo-700 text-white flex flex-col items-center justify-center p-10 w-full md:w-1/3">
