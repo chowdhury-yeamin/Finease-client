@@ -8,11 +8,9 @@
 
 FinEase Client is the **frontend** of a personal finance manager. It helps users track income and expenses, generate reports, and manage financial goals through a **simple, minimal, and secure interface**.
 
-![FinEase Screenshot](screenshot.png)
-*Add a screenshot of your app here.*
 
 **Repository Description:**  
-FinEase Client: A React & TailwindCSS personal finance manager to track income, expenses, and generate reports. Live demo: [https://your-client-live-link.com](https://your-client-live-link.com)  
+FinEase Client: A React & TailwindCSS personal finance manager to track income, expenses, and generate reports. Live demo: https://finease-client.netlify.app/  
 Tech stack: React, Vite, TailwindCSS (DaisyUI), Firebase Auth
 
 **Topics:**  
