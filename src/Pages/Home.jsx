@@ -45,7 +45,7 @@ const Home = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-cyan-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-cyan-600 dark:border-cyan-400"></div>
       </div>
     );
   }
@@ -76,8 +76,8 @@ const Home = () => {
                 className={({ isActive }) =>
                   `${
                     isActive
-                      ? "px-6 py-3 font-semibold rounded-lg shadow-lg bg-cyan-600 text-white hover:bg-cyan-700 transition"
-                      : "px-6 py-3 font-semibold rounded-lg shadow-lg bg-cyan-500 text-white hover:bg-cyan-600 transition"
+                      ? "px-6 py-3 font-semibold rounded-lg shadow-lg bg-cyan-600 text-white hover:bg-cyan-700 dark:bg-cyan-500 dark:hover:bg-cyan-600 transition"
+                      : "px-6 py-3 font-semibold rounded-lg shadow-lg bg-cyan-500 text-white hover:bg-cyan-600 dark:bg-cyan-400 dark:hover:bg-cyan-500 transition"
                   }`.trim()
                 }
               >
@@ -88,8 +88,8 @@ const Home = () => {
                 className={({ isActive }) =>
                   `${
                     isActive
-                      ? "px-6 py-3 font-semibold rounded-lg shadow-lg bg-cyan-600 text-white hover:bg-cyan-700 transition"
-                      : "px-6 py-3 font-semibold rounded-lg shadow-lg bg-white text-black hover:bg-cyan-600 transition"
+                      ? "px-6 py-3 font-semibold rounded-lg shadow-lg bg-cyan-600 text-white hover:bg-cyan-700 dark:bg-cyan-500 dark:hover:bg-cyan-600 transition"
+                      : "px-6 py-3 font-semibold rounded-lg shadow-lg bg-white text-black hover:bg-cyan-600 dark:bg-gray-800 dark:text-white dark:hover:bg-cyan-500 transition"
                   }`.trim()
                 }
               >
@@ -109,7 +109,7 @@ const Home = () => {
 
       {/* OVERVIEW */}
       <section className="max-w-6xl mx-auto px-6 py-12">
-        <h2 className="text-center text-3xl font-bold text-cyan-600 mb-6">
+        <h2 className="text-center text-3xl font-bold text-cyan-600 dark:text-cyan-400 mb-6">
           Overview
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -118,19 +118,19 @@ const Home = () => {
               icon: "💰",
               label: "Total Balance",
               value: balance,
-              color: "text-cyan-600",
+              color: "text-cyan-600 dark:text-cyan-400",
             },
             {
               icon: "📈",
               label: "Total Income",
               value: income,
-              color: "text-green-500",
+              color: "text-green-500 dark:text-green-400",
             },
             {
               icon: "📉",
               label: "Total Expenses",
               value: expenses,
-              color: "text-red-500",
+              color: "text-red-500 dark:text-red-400",
             },
           ].map((item, i) => (
             <div
@@ -152,7 +152,7 @@ const Home = () => {
       {/* BUDGET TIPS */}
       <section className="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-6">
         <div className="col-span-2 p-8 rounded-2xl shadow-lg bg-cyan-50 dark:bg-cyan-900/30 hover:-translate-y-2 transition">
-          <h3 className="text-2xl font-bold text-cyan-600 mb-3">
+          <h3 className="text-2xl font-bold text-cyan-600 dark:text-cyan-400 mb-3">
             Budgeting Tips
           </h3>
           <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
@@ -162,7 +162,7 @@ const Home = () => {
           </ul>
         </div>
         <div className="p-6 rounded-2xl shadow-lg bg-white dark:bg-[#0A0A0A] border border-cyan-200 dark:border-cyan-700 hover:-translate-y-2 transition">
-          <h3 className="text-xl font-bold text-cyan-600 mb-2">
+          <h3 className="text-xl font-bold text-cyan-600 dark:text-cyan-400 mb-2">
             Smart Saving Strategies
           </h3>
           <p className="text-gray-700 dark:text-gray-300">
@@ -174,7 +174,7 @@ const Home = () => {
       {/* WHY SECTION */}
       <section className="max-w-6xl mx-auto px-6 py-12">
         <div className="p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#0A0A0A]">
-          <h2 className="text-3xl font-bold text-cyan-600 mb-4">
+          <h2 className="text-3xl font-bold text-cyan-600 dark:text-cyan-400 mb-4">
             Why Financial Planning Matters
           </h2>
           <p className="text-gray-700 dark:text-gray-300 mb-6">
@@ -191,7 +191,7 @@ const Home = () => {
                 key={i}
                 className="p-5 rounded-lg bg-cyan-50 dark:bg-cyan-900/20 hover:shadow-lg transition"
               >
-                <h3 className="font-semibold">{title}</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-white">{title}</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
                   Stay financially prepared and make smarter choices.
                 </p>
@@ -210,7 +210,7 @@ const Home = () => {
             className="w-48 md:w-64 hover:scale-105 transition"
           />
           <div>
-            <h2 className="text-3xl font-bold text-cyan-600 mb-3">
+            <h2 className="text-3xl font-bold text-cyan-600 dark:text-cyan-400 mb-3">
               About FinEase
             </h2>
             <p className="text-gray-700 dark:text-gray-300">

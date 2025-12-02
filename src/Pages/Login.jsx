@@ -72,7 +72,7 @@ const Login = () => {
   };
 
   return (
-    <div className="card bg-base-100  w-full mx-auto max-w-sm shrink-0 shadow-2xl border border-gray-200 mt-10">
+    <div className="card bg-base-100 my-8 w-full mx-auto max-w-sm shrink-0 shadow-xl border border-gray-200 ">
       <div className="card-body">
         <h1 className="text-3xl font-bold text-center">Login</h1>
         <form onSubmit={handleLogIn}>
@@ -92,9 +92,7 @@ const Login = () => {
               className="input rounded-full focus:border-0 focus:outline-gray-200"
               placeholder="Password"
             />
-            <div>
-              <a className="link link-hover">Forgot password?</a>
-            </div>
+
             <button
               disabled={isLoading}
               className="btn text-white mt-4 rounded-full bg-blue-600 hover:bg-blue-800"
@@ -117,7 +115,7 @@ const Login = () => {
         </button>
         <p className="text-center">
           New to our website?{" "}
-          <Link className="text-blue-500 hover:text-blue-800" to="/register">
+          <Link className="text-blue-500 hover:text-blue-800 font-bold"  to="/register">
             Register
           </Link>
         </p>

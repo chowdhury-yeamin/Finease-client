@@ -36,11 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/my-transactions",
-        element: (
-          <PrivateRoute>
-            <MyTransactions></MyTransactions>
-          </PrivateRoute>
-        ),
+        element: <MyTransactions></MyTransactions>,
       },
       {
         path: "/my-transactions/:id",
@@ -75,8 +71,8 @@ const router = createBrowserRouter([
         element: <EditProfile></EditProfile>,
       },
       {
-        path:"/terms",
-        element:<Terms></Terms>
+        path: "/terms",
+        element: <Terms></Terms>,
       },
       {
         path: "/login",

@@ -38,41 +38,66 @@ const Navbar = () => {
             to="/"
           >
             <img src={img1} alt="FinEase Logo" className="w-8 h-8" />
-            <span className="text-xl font-bold text-gray-800 dark:text-gray-100">FinEase</span>
+            <span className="text-xl font-bold text-gray-800 dark:text-gray-100">
+              FinEase
+            </span>
           </Link>
         </div>
 
         <div className="hidden lg:flex navbar-center">
           <ul className="flex gap-4 text-gray-800 dark:text-gray-100">
-            <NavLink to="/" className={({ isActive }) => (isActive ? activeClass : normalClass)}>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? activeClass : normalClass
+              }
+            >
               Home
             </NavLink>
             {user && (
               <NavLink
                 to="/add-transaction"
-                className={({ isActive }) => (isActive ? activeClass : normalClass)}
+                className={({ isActive }) =>
+                  isActive ? activeClass : normalClass
+                }
               >
                 Add Transaction
               </NavLink>
             )}
+            <NavLink
+              to="/my-transactions"
+              className={({ isActive }) =>
+                isActive ? activeClass : normalClass
+              }
+            >
+              My Transactions
+            </NavLink>
+
             {user && (
               <NavLink
-                to="/my-transactions"
-                className={({ isActive }) => (isActive ? activeClass : normalClass)}
+                to="/reports"
+                className={({ isActive }) =>
+                  isActive ? activeClass : normalClass
+                }
               >
-                My Transactions
-              </NavLink>
-            )}
-            {user && (
-              <NavLink to="/reports" className={({ isActive }) => (isActive ? activeClass : normalClass)}>
                 Reports
               </NavLink>
             )}
-            <NavLink to="/about" className={({ isActive }) => (isActive ? activeClass : normalClass)}>
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                isActive ? activeClass : normalClass
+              }
+            >
               About
             </NavLink>
             {user && (
-              <NavLink to="/my-profile" className={({ isActive }) => (isActive ? activeClass : normalClass)}>
+              <NavLink
+                to="/my-profile"
+                className={({ isActive }) =>
+                  isActive ? activeClass : normalClass
+                }
+              >
                 My Profile
               </NavLink>
             )}
@@ -87,7 +112,11 @@ const Navbar = () => {
               onChange={(e) => handleTheme(e.target.checked)}
               defaultChecked={localStorage.getItem("theme") === "dark"}
             />
-            <svg aria-label="sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <svg
+              aria-label="sun"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
               <g
                 strokeLinejoin="round"
                 strokeLinecap="round"
@@ -106,7 +135,11 @@ const Navbar = () => {
                 <path d="m19.07 4.93-1.41 1.41"></path>
               </g>
             </svg>
-            <svg aria-label="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <svg
+              aria-label="moon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
               <g
                 strokeLinejoin="round"
                 strokeLinecap="round"
@@ -123,16 +156,34 @@ const Navbar = () => {
           {user ? (
             <>
               <div className="dropdown dropdown-end">
-                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
+                >
                   <div className="w-9 rounded-full border border-gray-300 dark:border-gray-600">
-                    <img alt="User" src={user.photoURL} referrerPolicy="no-referrer" />
+                    <img
+                      alt="User"
+                      src={user.photoURL}
+                      referrerPolicy="no-referrer"
+                    />
                   </div>
                 </div>
-                <ul tabIndex={0} className="dropdown-content bg-white dark:bg-[#0A0A0A] rounded-box w-52 p-3 shadow">
-                  <li className="font-bold text-sm text-gray-800 dark:text-gray-100">{user.displayName || "User"}</li>
-                  <li className="text-xs mb-2 text-gray-600 dark:text-gray-400">{user.email}</li>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content bg-white dark:bg-[#0A0A0A] rounded-box w-52 p-3 shadow"
+                >
+                  <li className="font-bold text-sm text-gray-800 dark:text-gray-100">
+                    {user.displayName || "User"}
+                  </li>
+                  <li className="text-xs mb-2 text-gray-600 dark:text-gray-400">
+                    {user.email}
+                  </li>
                   <li>
-                    <Link to="/my-profile" className="text-gray-800 dark:text-gray-100 flex items-center gap-2">
+                    <Link
+                      to="/my-profile"
+                      className="text-gray-800 dark:text-gray-100 flex items-center gap-2"
+                    >
                       <FaUser /> My Profile
                     </Link>
                   </li>

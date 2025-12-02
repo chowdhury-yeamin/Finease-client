@@ -103,7 +103,7 @@ const Register = () => {
   };
 
   return (
-    <div className="card bg-base-100  w-full mx-auto max-w-sm shrink-0 shadow-2xl border border-gray-200 mt-10">
+    <div className="card bg-base-100  w-full mx-auto max-w-sm shrink-0 shadow-2xl border border-gray-200 my-8">
       <div className="card-body">
         <h1 className="text-3xl font-bold text-center">Register</h1>
         <form onSubmit={handleRegister}>
@@ -161,7 +161,10 @@ const Register = () => {
         </button>
         <p className="text-center">
           Already have an account?{" "}
-          <Link className="text-blue-500 hover:text-blue-800" to="/login">
+          <Link
+            className="text-blue-500 font-bold  hover:text-blue-800 hover:text-underline"
+            to="/login"
+          >
             Login
           </Link>
         </p>

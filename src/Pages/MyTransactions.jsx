@@ -23,7 +23,7 @@ const MyTransactions = () => {
         );
         setTransactions(userData);
       } catch (error) {
-        console.log("Error loading transactions:", error);
+        console.error("Error loading transactions:", error);
         setTransactions([]);
       } finally {
         setLoading(false);
@@ -31,13 +31,14 @@ const MyTransactions = () => {
     };
 
     if (user?.email) fetchTransactions();
-    else setTransactions([]), setLoading(false);
+    else {
+      setTransactions([]);
+      setLoading(false);
+    }
   }, [user, sortBy, order]);
 
-  const handleUpdate = (id) => console.log("Update transaction:", id);
-
   const handleDelete = async (id) => {
-    const confirmDelete = await Swal.fire({
+    const confirm = await Swal.fire({
       title: "Are you sure?",
       text: "This transaction will be permanently deleted!",
       icon: "warning",
@@ -47,7 +48,7 @@ const MyTransactions = () => {
       confirmButtonText: "Yes, delete it!",
     });
 
-    if (confirmDelete.isConfirmed) {
+    if (confirm.isConfirmed) {
       try {
         const res = await fetch(
           `https://fin-ease-server-jade.vercel.app/transactions/${id}`,
@@ -55,21 +56,15 @@ const MyTransactions = () => {
         );
         if (res.ok) {
           setTransactions((prev) => prev.filter((txn) => txn._id !== id));
-          Swal.fire({
-            title: "Deleted!",
-            text: "Transaction deleted successfully.",
-            icon: "success",
-          });
+          Swal.fire("Deleted!", "Transaction deleted successfully.", "success");
         } else {
-          Swal.fire({ title: "Error!", text: "Failed to delete transaction.", icon: "error" });
+          Swal.fire("Error!", "Failed to delete transaction.", "error");
         }
       } catch {
-        Swal.fire({ title: "Error!", text: "Something went wrong.", icon: "error" });
+        Swal.fire("Error!", "Something went wrong.", "error");
       }
     }
   };
-
-  const handleViewDetails = (transaction) => console.log("Transaction details:", transaction);
 
   if (loading)
     return (
@@ -80,37 +75,77 @@ const MyTransactions = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
-      <h1 className="text-3xl font-bold text-center mb-8 text-[#0FB19D] dark:text-[#0FB19D]">
+      <h1 className="text-4xl font-bold text-center mb-8 text-[#0FB19D] dark:text-[#0FB19D]">
         My Transactions
       </h1>
 
       {/* Sorting Controls */}
-      <div className="flex gap-4 mb-6 items-center justify-center">
-        <label className="font-semibold text-gray-700 dark:text-gray-300">Sort by:</label>
-        <select
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-          className="p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-[#0A0A0A] text-gray-900 dark:text-white"
-        >
-          <option value="date">Date</option>
-          <option value="amount">Amount</option>
-        </select>
-        <select
-          value={order}
-          onChange={(e) => setOrder(e.target.value)}
-          className="p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-[#0A0A0A] text-gray-900 dark:text-white"
-        >
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
-        </select>
-      </div>
-
-      {transactions.length === 0 ? (
-        <div className="text-center py-10">
-          <p className="text-gray-500 dark:text-gray-400 text-xl">No transactions found.</p>
+      {user ? (
+        <div className="flex flex-col md:flex-row gap-4 mb-6 items-center justify-center">
+          <label className="font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">
+            Sort by:
+          </label>
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="p-2 md:p-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-[#0A0A0A] text-gray-900 dark:text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 dark:focus:ring-cyan-400 transition"
+          >
+            <option value="date">Date</option>
+            <option value="amount">Amount</option>
+          </select>
+          <select
+            value={order}
+            onChange={(e) => setOrder(e.target.value)}
+            className="p-2 md:p-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-[#0A0A0A] text-gray-900 dark:text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 dark:focus:ring-cyan-400 transition"
+          >
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+          </select>
         </div>
       ) : (
-        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+        ""
+      )}
+
+      {/* Empty state */}
+      {transactions.length === 0 ? (
+        <div className="text-center py-3">
+          <p className="text-gray-500 dark:text-gray-400 text-3xl mb-2">
+            No transactions found.
+          </p>
+          <p className="mb-2 text-lg">
+            Start by adding your first transaction.
+          </p>
+          {user ? (
+            <p>
+              Go to{" "}
+              <Link
+                to="/add-transaction"
+                className="text-cyan-600 font-bold hover:underline"
+              >
+                Add Transaction
+              </Link>
+            </p>
+          ) : (
+            <p>
+              <Link
+                to="/login"
+                className="text-cyan-600 font-bold hover:underline"
+              >
+                Login
+              </Link>{" "}
+              or{" "}
+              <Link
+                to="/register"
+                className="text-cyan-600 font-bold hover:underline"
+              >
+                Register
+              </Link>{" "}
+              to start
+            </p>
+          )}
+        </div>
+      ) : (
+        <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {transactions.map((txn) => (
             <div
               key={txn._id}
@@ -134,10 +169,10 @@ const MyTransactions = () => {
                     {txn.type}
                   </span>
                   <span className="font-mono font-bold text-lg text-gray-700 dark:text-gray-300">
-                    {txn.type === "Income" ? "+" : "-"}${txn.amount.toLocaleString()}
+                    {txn.type === "Income" ? "+" : "-"}$
+                    {txn.amount.toLocaleString()}
                   </span>
                 </div>
-
                 <div className="space-y-2 text-gray-600 dark:text-gray-400">
                   <div className="flex justify-between">
                     <span>Category:</span>
@@ -152,30 +187,23 @@ const MyTransactions = () => {
                 </div>
               </div>
 
-              <div className="p-4 bg-gray-50 dark:bg-[#051622] flex justify-between gap-2">
+              <div className="p-4 bg-gray-50 dark:bg-[#051622] flex flex-col md:flex-row gap-2">
                 <Link
                   to={`/my-transactions/${txn._id}`}
-                  onClick={() => handleViewDetails(txn)}
-                  state={{
-                    transaction: txn,
-                    categoryTotal: transactions
-                      .filter((t) => t.category === txn.category)
-                      .reduce((sum, item) => sum + Number(item.amount || 0), 0),
-                  }}
-                  className="flex-1 px-1 py-1 bg-[#0FB19D] text-white rounded-lg hover:opacity-90 transition"
+                  state={{ transaction: txn }}
+                  className="flex-1 px-3 py-2 bg-[#0FB19D] text-white rounded-lg text-center hover:opacity-90 transition"
                 >
                   View Details
                 </Link>
                 <Link
                   to={`/transaction/update/${txn._id}`}
-                  onClick={() => handleUpdate(txn._id)}
-                  className="flex-1  px-1 py-1 bg-yellow-500 text-white rounded-lg hover:opacity-90 transition"
+                  className="flex-1 px-3 py-2 bg-yellow-500 text-white rounded-lg text-center hover:opacity-90 transition"
                 >
                   Update
                 </Link>
                 <button
                   onClick={() => handleDelete(txn._id)}
-                  className="flex-1 px-1 py-1 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+                  className="flex-1 px-3 py-2 bg-red-600 text-white rounded-lg text-center hover:bg-red-700 transition"
                 >
                   Delete
                 </button>
