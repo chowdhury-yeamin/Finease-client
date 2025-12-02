@@ -23,7 +23,9 @@ const Reports = () => {
     const fetchTransactions = async () => {
       try {
         setLoading(true);
-        const res = await fetch("https://fin-ease-server-jade.vercel.app/transactions");
+        const res = await fetch(
+          "https://fin-ease-server-jade.vercel.app/transactions"
+        );
         const data = await res.json();
 
         const userData = data.filter(
@@ -88,7 +90,7 @@ const Reports = () => {
   return (
     <main className=" py-12 px-6">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600 mb-10">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-center  bg-clip-text text-[#0FB19D] mb-10">
           Financial Reports
         </h1>
 

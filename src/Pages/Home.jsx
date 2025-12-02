@@ -1,5 +1,3 @@
-/* Home.jsx - theme toggle ready (light + dark) */
-
 import React, { useContext, useEffect, useState } from "react";
 import img1 from "../assets/FinEase-Logo.png";
 import { NavLink } from "react-router";
@@ -9,7 +7,7 @@ import CountUp from "../Components/CountUp";
 const Home = () => {
   const { user } = useContext(AuthContext);
   const [transactions, setTransactions] = useState([]);
-  const [setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const load = async () => {
@@ -18,11 +16,9 @@ const Home = () => {
           "https://fin-ease-server-jade.vercel.app/transactions"
         );
         const data = await res.json();
-
         const userData = data.filter(
           (t) => t.userEmail?.toLowerCase() === user?.email?.toLowerCase()
         );
-
         setTransactions(userData);
       } catch (err) {
         console.error(err);
@@ -46,57 +42,61 @@ const Home = () => {
 
   const balance = income - expenses;
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-cyan-600"></div>
+      </div>
+    );
+  }
+
   return (
     <main className="flex-grow">
       {/* HERO */}
       <section
-        className="
-          max-w-6xl mx-auto py-16 px-6 rounded-3xl shadow-lg overflow-hidden
-          bg-gradient-to-br from-[#E6FFF9] to-[#0FB19D]/40
-          dark:bg-gradient-to-br dark:from-[#051622] dark:to-[#0FB19D]
-          text-gray-900 dark:text-white
-        "
+        className="max-w-6xl mx-auto py-16 px-6 rounded-3xl shadow-lg overflow-hidden
+        bg-gradient-to-br from-cyan-50 to-cyan-200 dark:from-[#051622] dark:to-[#0FB19D]
+        text-gray-900 dark:text-white"
       >
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 items-center">
           <div>
             <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
               Take control of your
-              <span className="text-[#0FB19D] dark:text-[#0FB19D]">
+              <span className="text-cyan-600 dark:text-cyan-400">
                 {" "}
                 finances
               </span>
             </h1>
-
             <p className="text-lg text-gray-700 dark:text-gray-300 max-w-xl mb-6">
-              Track income & expenses with a clean, modern interface.
+              Track income & expenses with a modern, vibrant interface.
             </p>
-
             <div className="flex flex-wrap gap-3">
               <NavLink
                 to="/add-transaction"
-                className="
-                  px-5 py-2 font-semibold rounded-lg shadow
-                  bg-[#0FB19D] text-white
-                  hover:opacity-90 transition
-                "
+                className={({ isActive }) =>
+                  `${
+                    isActive
+                      ? "px-6 py-3 font-semibold rounded-lg shadow-lg bg-cyan-600 text-white hover:bg-cyan-700 transition"
+                      : "px-6 py-3 font-semibold rounded-lg shadow-lg bg-cyan-500 text-white hover:bg-cyan-600 transition"
+                  }`.trim()
+                }
               >
                 Get Started
               </NavLink>
-
               <NavLink
                 to="/about"
-                className="
-                  px-5 py-2 rounded-lg border
-                  border-gray-300 dark:border-white/40
-                  text-gray-800 dark:text-white
-                  hover:bg-gray-100 dark:hover:bg-white/10 transition
-                "
+                className={({ isActive }) =>
+                  `${
+                    isActive
+                      ? "px-6 py-3 font-semibold rounded-lg shadow-lg bg-cyan-600 text-white hover:bg-cyan-700 transition"
+                      : "px-6 py-3 font-semibold rounded-lg shadow-lg bg-white text-black hover:bg-cyan-600 transition"
+                  }`.trim()
+                }
               >
                 Learn More
               </NavLink>
             </div>
           </div>
-
           <div className="hidden md:flex justify-center">
             <img
               src={img1}
@@ -109,23 +109,22 @@ const Home = () => {
 
       {/* OVERVIEW */}
       <section className="max-w-6xl mx-auto px-6 py-12">
-        <h2 className="text-center text-3xl font-bold text-[#0FB19D] mb-6">
+        <h2 className="text-center text-3xl font-bold text-cyan-600 mb-6">
           Overview
         </h2>
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             {
               icon: "💰",
               label: "Total Balance",
               value: balance,
-              color: "text-[#0FB19D]",
+              color: "text-cyan-600",
             },
             {
               icon: "📈",
               label: "Total Income",
               value: income,
-              color: "text-[#0FB19D]",
+              color: "text-green-500",
             },
             {
               icon: "📉",
@@ -136,12 +135,7 @@ const Home = () => {
           ].map((item, i) => (
             <div
               key={i}
-              className="
-                p-6 rounded-2xl shadow border
-                bg-white dark:bg-[#0A0A0A]
-                border-gray-200 dark:border-gray-700
-                text-center hover:-translate-y-2 transition duration-300
-              "
+              className="p-6 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#0A0A0A] text-center hover:-translate-y-2 transition"
             >
               <div className="text-3xl mb-2">{item.icon}</div>
               <h4 className="text-gray-500 dark:text-gray-400 text-sm">
@@ -157,14 +151,8 @@ const Home = () => {
 
       {/* BUDGET TIPS */}
       <section className="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-6">
-        <div
-          className="
-            col-span-2 p-8 rounded-2xl shadow
-            bg-[#0FB19D]/10 dark:bg-[#0FB19D]/20
-            hover:-translate-y-2 transition
-          "
-        >
-          <h3 className="text-2xl font-bold text-[#0FB19D] mb-3">
+        <div className="col-span-2 p-8 rounded-2xl shadow-lg bg-cyan-50 dark:bg-cyan-900/30 hover:-translate-y-2 transition">
+          <h3 className="text-2xl font-bold text-cyan-600 mb-3">
             Budgeting Tips
           </h3>
           <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
@@ -173,16 +161,8 @@ const Home = () => {
             <li>Cut unnecessary expenses.</li>
           </ul>
         </div>
-
-        <div
-          className="
-            p-6 rounded-2xl shadow
-            bg-white dark:bg-[#0A0A0A]
-            border border-[#0FB19D]/20
-            hover:-translate-y-2 transition
-          "
-        >
-          <h3 className="text-xl font-bold text-[#0FB19D] mb-2">
+        <div className="p-6 rounded-2xl shadow-lg bg-white dark:bg-[#0A0A0A] border border-cyan-200 dark:border-cyan-700 hover:-translate-y-2 transition">
+          <h3 className="text-xl font-bold text-cyan-600 mb-2">
             Smart Saving Strategies
           </h3>
           <p className="text-gray-700 dark:text-gray-300">
@@ -193,22 +173,14 @@ const Home = () => {
 
       {/* WHY SECTION */}
       <section className="max-w-6xl mx-auto px-6 py-12">
-        <div
-          className="
-            p-8 rounded-2xl shadow border
-            bg-white dark:bg-[#0A0A0A]
-            border-gray-200 dark:border-gray-700
-          "
-        >
-          <h2 className="text-3xl font-bold text-[#0FB19D] mb-4">
+        <div className="p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#0A0A0A]">
+          <h2 className="text-3xl font-bold text-cyan-600 mb-4">
             Why Financial Planning Matters
           </h2>
-
           <p className="text-gray-700 dark:text-gray-300 mb-6">
             Planning creates clarity, protects you during emergencies, and
             accelerates goal achievement.
           </p>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               "Emergency Preparedness",
@@ -217,11 +189,7 @@ const Home = () => {
             ].map((title, i) => (
               <div
                 key={i}
-                className="
-                    p-5 rounded-lg
-                    bg-[#0FB19D]/10 dark:bg-[#0FB19D]/20 
-                    hover:shadow-lg transition
-                  "
+                className="p-5 rounded-lg bg-cyan-50 dark:bg-cyan-900/20 hover:shadow-lg transition"
               >
                 <h3 className="font-semibold">{title}</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
@@ -235,26 +203,21 @@ const Home = () => {
 
       {/* ABOUT */}
       <section className="max-w-6xl mx-auto px-6 py-12">
-        <div
-          className="
-            p-8 md:p-10 rounded-2xl shadow flex flex-col md:flex-row gap-6
-            bg-[#0FB19D]/10 dark:bg-[#0FB19D]/20
-            hover:shadow-xl transition
-          "
-        >
+        <div className="p-8 md:p-10 rounded-2xl shadow-lg flex flex-col md:flex-row gap-6 bg-cyan-50 dark:bg-cyan-900/20 hover:shadow-xl transition">
           <img
             src={img1}
             alt="FinEase"
             className="w-48 md:w-64 hover:scale-105 transition"
           />
-
           <div>
-            <h2 className="text-3xl font-bold text-[#0FB19D] mb-3">
+            <h2 className="text-3xl font-bold text-cyan-600 mb-3">
               About FinEase
             </h2>
             <p className="text-gray-700 dark:text-gray-300">
               FinEase helps individuals and small businesses manage finances
-              clearly and efficiently.
+              clearly and efficiently. It’s a simple, secure personal finance
+              manager built to track income and expenses, understand spending
+              habits, and reach financial goals.
             </p>
             <p className="italic text-gray-600 dark:text-gray-400 mt-4">
               “Your journey to financial freedom starts here.”

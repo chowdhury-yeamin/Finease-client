@@ -28,16 +28,12 @@ const AddTransaction = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Create transaction object with user info
     const transactionData = {
       ...formData,
       amount: Number(formData.amount),
@@ -45,17 +41,14 @@ const AddTransaction = () => {
       userName: user?.displayName,
       created_at: new Date().toISOString(),
     };
-    
+
     fetch("https://fin-ease-server-jade.vercel.app/transactions", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(transactionData),
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("Transaction added:", data);
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -63,7 +56,6 @@ const AddTransaction = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        // Reset form 
         setFormData({
           type: "Income",
           category: "",
@@ -72,37 +64,36 @@ const AddTransaction = () => {
           date: new Date().toISOString().split("T")[0],
         });
       })
-      .catch((err) => {
-        console.error("Error adding transaction:", err);
+      .catch(() =>
         Swal.fire({
           icon: "error",
           title: "Failed to add transaction",
           text: "Please try again",
-        });
-      });
+        })
+      );
   };
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold text-center mb-8 text-blue-600">
+      <h1 className="text-3xl font-bold text-center mb-8 text-[#0FB19D] dark:text-[#0FB19D]">
         Add New Transaction
       </h1>
 
       <form
         onSubmit={handleSubmit}
-        className="bg-white shadow-xl rounded-lg p-8"
+        className="bg-white dark:bg-[#0A0A0A] shadow-xl rounded-2xl p-8"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Transaction Type */}
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">
+            <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">
               Transaction Type
             </label>
             <select
               name="type"
               value={formData.type}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-[#0FB19D] focus:border-[#0FB19D] bg-white dark:bg-[#0A0A0A] text-gray-900 dark:text-white"
               required
             >
               <option value="Income">Income</option>
@@ -112,14 +103,14 @@ const AddTransaction = () => {
 
           {/* Category */}
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">
+            <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">
               Category
             </label>
             <select
               name="category"
               value={formData.category}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-[#0FB19D] focus:border-[#0FB19D] bg-white dark:bg-[#0A0A0A] text-gray-900 dark:text-white"
               required
             >
               <option value="">Select Category</option>
@@ -133,7 +124,7 @@ const AddTransaction = () => {
 
           {/* Amount */}
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">
+            <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">
               Amount
             </label>
             <input
@@ -142,7 +133,7 @@ const AddTransaction = () => {
               value={formData.amount}
               onChange={handleChange}
               placeholder="Enter amount"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-[#0FB19D] focus:border-[#0FB19D] bg-white dark:bg-[#0A0A0A] text-gray-900 dark:text-white"
               required
               min="0"
               step="0.01"
@@ -151,7 +142,7 @@ const AddTransaction = () => {
 
           {/* Date */}
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">
+            <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">
               Date
             </label>
             <input
@@ -159,14 +150,14 @@ const AddTransaction = () => {
               name="date"
               value={formData.date}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-[#0FB19D] focus:border-[#0FB19D] bg-white dark:bg-[#0A0A0A] text-gray-900 dark:text-white"
               required
             />
           </div>
 
           {/* Description */}
           <div className="md:col-span-2">
-            <label className="block text-gray-700 font-semibold mb-2">
+            <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">
               Description
             </label>
             <textarea
@@ -175,33 +166,33 @@ const AddTransaction = () => {
               onChange={handleChange}
               placeholder="Enter transaction description"
               rows="3"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-[#0FB19D] focus:border-[#0FB19D] bg-white dark:bg-[#0A0A0A] text-gray-900 dark:text-white"
               required
-            ></textarea>
+            />
           </div>
 
-          {/* User Information Read-only */}
+          {/* User Info */}
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">
+            <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">
               User Email
             </label>
             <input
               type="email"
               value={user?.email || ""}
               readOnly
-              className="w-full p-3 bg-gray-100 border border-gray-300 rounded-lg"
+              className="w-full p-3 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white"
             />
           </div>
 
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">
+            <label className="block text-gray-700 dark:text-gray-300 font-semibold mb-2">
               User Name
             </label>
             <input
               type="text"
               value={user?.displayName || ""}
               readOnly
-              className="w-full p-3 bg-gray-100 border border-gray-300 rounded-lg"
+              className="w-full p-3 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-900 dark:text-white"
             />
           </div>
         </div>
@@ -210,7 +201,7 @@ const AddTransaction = () => {
         <div className="mt-8 flex justify-center">
           <button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            className="bg-[#0FB19D] hover:opacity-90 text-white font-bold py-3 px-8 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0FB19D]/50 focus:ring-opacity-50"
           >
             Add Transaction
           </button>
