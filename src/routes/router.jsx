@@ -14,6 +14,7 @@ import MyProfile from "../Pages/MyProfile";
 import ErrorPage from "../Pages/ErrorPage";
 import { Edit } from "lucide-react";
 import EditProfile from "../Pages/EditProfile";
+import Terms from "../Pages/Terms";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
       {
         path: "/edit-profile",
         element: <EditProfile></EditProfile>,
+      },
+      {
+        path:"/terms",
+        element:<Terms></Terms>
       },
       {
         path: "/login",
