@@ -104,12 +104,16 @@ const Home = () => {
               </NavLink>
             </div>
           </motion.div>
-          <motion.div
+          <motion.div 
             variants={fadeInUp}
             className="hidden md:flex justify-center"
             whileHover={{ scale: 1.05 }}
           >
-            <img src={img1} alt="FinEase" className="w-56 h-56 object-contain drop-shadow-2xl" />
+            <img
+              src={img1}
+              alt="FinEase"
+              className="w-56 h-56 object-contain drop-shadow-2xl"
+            />
           </motion.div>
         </div>
       </motion.section>
@@ -127,9 +131,24 @@ const Home = () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
-            { icon: "💰", label: "Total Balance", value: balance, color: "text-cyan-600 dark:text-cyan-400" },
-            { icon: "📈", label: "Total Income", value: income, color: "text-green-500 dark:text-green-400" },
-            { icon: "📉", label: "Total Expenses", value: expenses, color: "text-red-500 dark:text-red-400" },
+            {
+              icon: "💰",
+              label: "Total Balance",
+              value: balance,
+              color: "text-cyan-600 dark:text-cyan-400",
+            },
+            {
+              icon: "📈",
+              label: "Total Income",
+              value: income,
+              color: "text-green-500 dark:text-green-400",
+            },
+            {
+              icon: "📉",
+              label: "Total Expenses",
+              value: expenses,
+              color: "text-red-500 dark:text-red-400",
+            },
           ].map((item, i) => (
             <motion.div
               key={i}
@@ -137,7 +156,9 @@ const Home = () => {
               className="p-6 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#0A0A0A] text-center hover:-translate-y-2 transition"
             >
               <div className="text-3xl mb-2">{item.icon}</div>
-              <h4 className="text-gray-500 dark:text-gray-400 text-sm">{item.label}</h4>
+              <h4 className="text-gray-500 dark:text-gray-400 text-sm">
+                {item.label}
+              </h4>
               <p className={`text-2xl font-bold mt-2 ${item.color}`}>
                 <CountUp from={0} to={item.value || 0} duration={1} />
               </p>
@@ -193,16 +214,23 @@ const Home = () => {
             Why Financial Planning Matters
           </h2>
           <p className="text-gray-700 dark:text-gray-300 mb-6">
-            Planning creates clarity, protects you during emergencies, and accelerates goal achievement.
+            Planning creates clarity, protects you during emergencies, and
+            accelerates goal achievement.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {["Emergency Preparedness", "Goal Achievement", "Better Decisions"].map((title, i) => (
+            {[
+              "Emergency Preparedness",
+              "Goal Achievement",
+              "Better Decisions",
+            ].map((title, i) => (
               <motion.div
                 key={i}
                 variants={fadeInUp}
                 className="p-5 rounded-lg bg-cyan-50 dark:bg-cyan-900/20 hover:shadow-lg transition"
               >
-                <h3 className="font-semibold text-gray-900 dark:text-white">{title}</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-white">
+                  {title}
+                </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
                   Stay financially prepared and make smarter choices.
                 </p>
@@ -229,9 +257,14 @@ const Home = () => {
             className="w-48 md:w-64"
           />
           <motion.div variants={fadeInUp}>
-            <h2 className="text-3xl font-bold text-cyan-600 dark:text-cyan-400 mb-3">About FinEase</h2>
+            <h2 className="text-3xl font-bold text-cyan-600 dark:text-cyan-400 mb-3">
+              About FinEase
+            </h2>
             <p className="text-gray-700 dark:text-gray-300">
-              FinEase helps individuals and small businesses manage finances clearly and efficiently. It’s a simple, secure personal finance manager built to track income and expenses, understand spending habits, and reach financial goals.
+              FinEase helps individuals and small businesses manage finances
+              clearly and efficiently. It’s a simple, secure personal finance
+              manager built to track income and expenses, understand spending
+              habits, and reach financial goals.
             </p>
             <p className="italic text-gray-600 dark:text-gray-400 mt-4">
               “Your journey to financial freedom starts here.”
