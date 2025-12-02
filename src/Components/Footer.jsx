@@ -66,6 +66,7 @@ const Footer = () => {
                 My Profile
               </Link>
             )}
+            <Link to="/terms">Terms & Conditions</Link>
           </div>
 
           <div className="flex justify-center md:justify-start gap-4 mt-4 text-gray-600 dark:text-gray-400">
