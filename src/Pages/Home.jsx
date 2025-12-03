@@ -366,33 +366,7 @@ const Home = () => {
         </section>
       )}
 
-      {/* CATEGORIES SECTION */}
-      <section className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 mb-16">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-800 dark:text-slate-100 mb-4">
-            Browse by Category
-          </h2>
-          <p className="text-slate-600 dark:text-slate-400 text-lg">
-            Find the tools you need by category
-          </p>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {["Planning", "Tracking", "Management", "Reports"].map(
-            (category, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-gradient-to-br from-[#0A9284] to-[#0FB19D] p-6 rounded-xl text-center text-white hover:scale-105 transition-transform cursor-pointer"
-              >
-                <h3 className="text-xl font-bold">{category}</h3>
-              </motion.div>
-            )
-          )}
-        </div>
-      </section>
+      
 
       {/* TOP-RATED/HIGHLIGHTED ITEMS SECTION */}
       <section className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 mb-16">
