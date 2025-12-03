@@ -95,17 +95,17 @@ const Reports = () => {
         </h1>
 
         {loading ? (
-          <p className="text-center text-gray-600">
-            <span className="loading loading-spinner loading-xl"></span>
-          </p>
+          <div className="flex items-center justify-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-[#0A9284] dark:border-[#0FB19D]"></div>
+          </div>
         ) : transactions.length === 0 ? (
-          <p className="text-center text-gray-600">
+          <p className="text-center text-slate-600 dark:text-slate-400">
             No transactions to display yet.
           </p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div className="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
-              <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-md p-6 border border-slate-200 dark:border-slate-700 transition-transform transition-shadow duration-300 hover:-translate-y-2 hover:shadow-2xl">
+              <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100 text-center mb-4">
                 Spending by Category
               </h2>
 
@@ -131,8 +131,8 @@ const Reports = () => {
               </ResponsiveContainer>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
-              <h2 className="text-2xl font-semibold text-gray-800 text-center mb-4">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-md p-6 border border-slate-200 dark:border-slate-700 transition-transform transition-shadow duration-300 hover:-translate-y-2 hover:shadow-2xl">
+              <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100 text-center mb-4">
                 Monthly Totals
               </h2>
 

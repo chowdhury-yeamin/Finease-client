@@ -8,9 +8,9 @@ const MyProfile = () => {
 
   return (
     <div className="p-8 flex items-center justify-center my-10">
-      <div className="shadow-2xl rounded-3xl overflow-hidden flex flex-col md:flex-row max-w-6xl w-full backdrop-blur-md bg-white/90 dark:bg-[#1A1A1A]/95">
+      <div className="shadow-2xl rounded-3xl overflow-hidden flex flex-col md:flex-row max-w-6xl w-full backdrop-blur-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
         {/* Sidebar Card */}
-        <div className="bg-gradient-to-b from-blue-600 to-indigo-700 text-white flex flex-col items-center justify-center p-10 w-full md:w-1/3">
+        <div className="bg-gradient-to-br from-[#0A9284] to-[#0FB19D] text-white flex flex-col items-center justify-center p-10 w-full md:w-1/3">
           <img
             src={user?.photoURL}
             alt={user?.displayName}
@@ -19,42 +19,42 @@ const MyProfile = () => {
           <h2 className="text-2xl font-bold mb-1">
             {user?.displayName || "User Name"}
           </h2>
-          <p className="text-blue-100 text-sm mb-6">
+          <p className="text-white/90 text-sm mb-6">
             {user?.email || "example@email.com"}
           </p>
         </div>
 
         {/* Profile Info Section */}
-        <div className="flex-1 p-10 bg-white dark:bg-[#0B0B0B]">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-100 mb-6 flex items-center gap-2">
-            <User className="w-8 h-8 text-blue-600" /> Account Information
+        <div className="flex-1 p-10 bg-white dark:bg-slate-800">
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-800 dark:text-slate-100 mb-6 flex items-center gap-2">
+            <User className="w-8 h-8 text-[#0A9284] dark:text-[#0FB19D]" /> Account Information
           </h1>
 
           <div className="space-y-6">
             <div>
-              <p className="text-gray-500 dark:text-gray-400 uppercase text-sm font-semibold mb-1">
+              <p className="text-slate-500 dark:text-slate-400 uppercase text-sm font-semibold mb-1">
                 Full Name
               </p>
-              <p className="text-xl font-medium text-gray-800 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2">
+              <p className="text-xl font-medium text-slate-800 dark:text-slate-300 border-b border-slate-200 dark:border-slate-700 pb-2">
                 {user?.displayName || "N/A"}
               </p>
             </div>
 
             <div>
-              <p className="text-gray-500 dark:text-gray-400 uppercase text-sm font-semibold mb-1">
+              <p className="text-slate-500 dark:text-slate-400 uppercase text-sm font-semibold mb-1">
                 Email Address
               </p>
-              <p className="text-xl font-medium text-gray-800 dark:text-gray-100 flex items-center gap-2 border-b border-gray-200 dark:border-gray-700 pb-2">
-                <Mail className="w-5 h-5 text-blue-600" />
+              <p className="text-xl font-medium text-slate-800 dark:text-slate-300 flex items-center gap-2 border-b border-slate-200 dark:border-slate-700 pb-2">
+                <Mail className="w-5 h-5 text-[#0A9284] dark:text-[#0FB19D]" />
                 {user?.email || "N/A"}
               </p>
             </div>
 
             <div>
-              <p className="text-gray-500 dark:text-gray-400 uppercase text-sm font-semibold mb-1">
+              <p className="text-slate-500 dark:text-slate-400 uppercase text-sm font-semibold mb-1">
                 Photo URL
               </p>
-              <p className="text-sm text-gray-700 dark:text-gray-300 break-all border-b border-gray-200 dark:border-gray-700 pb-2">
+              <p className="text-sm text-slate-700 dark:text-slate-400 break-all border-b border-slate-200 dark:border-slate-700 pb-2">
                 {user?.photoURL || "N/A"}
               </p>
             </div>
@@ -63,7 +63,7 @@ const MyProfile = () => {
           <div className="mt-10">
             <Link
               to="/edit-profile"
-              className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-md hover:from-blue-700 hover:to-indigo-700 transition-all duration-300"
+              className="px-8 py-3 bg-gradient-to-r from-[#0A9284] to-[#0FB19D] text-white font-semibold rounded-xl shadow-md hover:opacity-90 transition-opacity"
             >
               Manage Account
             </Link>

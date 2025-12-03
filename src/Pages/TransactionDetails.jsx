@@ -46,8 +46,8 @@ const TransactionDetails = () => {
   }, [id, location.state]);
 
 
-  if (loading) return <div className="p-6 text-center">Loading...</div>;
-  if (error) return <div className="p-6 text-center text-red-600">{error}</div>;
+  if (loading) return <div className="p-6 text-center text-slate-600 dark:text-slate-400">Loading...</div>;
+  if (error) return <div className="p-6 text-center text-red-600 dark:text-red-400">{error}</div>;
 
   const tx = transaction || {};
   const type = tx.type || "Something";
@@ -61,33 +61,33 @@ const TransactionDetails = () => {
       <div className="mb-6">
         <Link
           to="/my-transactions"
-          className="inline-flex items-center gap-2 text-sm text-blue-600"
+          className="inline-flex items-center gap-2 text-sm text-[#0A9284] dark:text-[#0FB19D] hover:opacity-80 transition-opacity"
         >
           <FaArrowLeft /> Back
         </Link>
       </div>
 
-      <h2 className="text-2xl font-semibold mb-4">Transaction details</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-slate-800 dark:text-slate-100">Transaction details</h2>
 
-      <div className="bg-white shadow rounded-lg p-6 space-y-4">
+      <div className="bg-white dark:bg-slate-800 shadow rounded-lg p-6 space-y-4 border border-slate-200 dark:border-slate-700">
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <div className="text-xs text-gray-500">Type</div>
-            <div className="mt-1 font-medium">{type}</div>
+            <div className="text-xs text-slate-500 dark:text-slate-400">Type</div>
+            <div className="mt-1 font-medium text-slate-800 dark:text-slate-200">{type}</div>
           </div>
 
           <div>
-            <div className="text-xs text-gray-500">Category</div>
-            <div className="mt-1 font-medium">{category}</div>
+            <div className="text-xs text-slate-500 dark:text-slate-400">Category</div>
+            <div className="mt-1 font-medium text-slate-800 dark:text-slate-200">{category}</div>
           </div>
 
           <div>
-            <div className="text-xs text-gray-500">Amount</div>
+            <div className="text-xs text-slate-500 dark:text-slate-400">Amount</div>
             <div
               className={`mt-1 font-medium ${
                 String(type).toLowerCase() === "expense"
-                  ? "text-red-600"
-                  : "text-green-600"
+                  ? "text-red-600 dark:text-red-400"
+                  : "text-[#0FB19D]"
               }`}
             >
               ${amount}
@@ -95,21 +95,21 @@ const TransactionDetails = () => {
           </div>
 
           <div>
-            <div className="text-xs text-gray-500">Date</div>
-            <div className="mt-1">{new Date(date).toLocaleString()}</div>
+            <div className="text-xs text-slate-500 dark:text-slate-400">Date</div>
+            <div className="mt-1 text-slate-800 dark:text-slate-200">{new Date(date).toLocaleString()}</div>
           </div>
         </div>
 
         <div>
-          <div className="text-xs text-gray-500">Description</div>
-          <div className="mt-1 text-sm text-gray-700">{description}</div>
+          <div className="text-xs text-slate-500 dark:text-slate-400">Description</div>
+          <div className="mt-1 text-sm text-slate-700 dark:text-slate-300">{description}</div>
         </div>
 
-        <div className="pt-4 border-t">
-          <div className="text-xs text-gray-500">
+        <div className="pt-4 border-t border-slate-200 dark:border-slate-700">
+          <div className="text-xs text-slate-500 dark:text-slate-400">
             Total amount for category "{category}"
           </div>
-          <div className="mt-1 font-semibold">${categoryTotal}</div>
+          <div className="mt-1 font-semibold text-slate-800 dark:text-slate-100">${categoryTotal}</div>
         </div>
       </div>
     </div>

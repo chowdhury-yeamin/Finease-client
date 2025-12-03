@@ -75,20 +75,20 @@ const MyTransactions = () => {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
-      <h1 className="text-4xl font-bold text-center mb-8 text-[#0FB19D] dark:text-[#0FB19D]">
+      <h1 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-[#0A9284] to-[#0FB19D] bg-clip-text text-transparent">
         My Transactions
       </h1>
 
       {/* Sorting Controls */}
       {user ? (
         <div className="flex flex-col md:flex-row gap-4 mb-6 items-center justify-center">
-          <label className="font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">
+          <label className="font-semibold text-slate-700 dark:text-slate-300 whitespace-nowrap">
             Sort by:
           </label>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="p-2 md:p-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-[#0A0A0A] text-gray-900 dark:text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 dark:focus:ring-cyan-400 transition"
+            className="p-2 md:p-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#0A9284] dark:focus:ring-[#0FB19D] transition"
           >
             <option value="date">Date</option>
             <option value="amount">Amount</option>
@@ -96,7 +96,7 @@ const MyTransactions = () => {
           <select
             value={order}
             onChange={(e) => setOrder(e.target.value)}
-            className="p-2 md:p-3 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-[#0A0A0A] text-gray-900 dark:text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 dark:focus:ring-cyan-400 transition"
+            className="p-2 md:p-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-[#0A9284] dark:focus:ring-[#0FB19D] transition"
           >
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
@@ -109,34 +109,34 @@ const MyTransactions = () => {
       {/* Empty state */}
       {transactions.length === 0 ? (
         <div className="text-center py-3">
-          <p className="text-gray-500 dark:text-gray-400 text-3xl mb-2">
+          <p className="text-slate-500 dark:text-slate-400 text-3xl mb-2">
             No transactions found.
           </p>
-          <p className="mb-2 text-lg">
+          <p className="mb-2 text-lg text-slate-600 dark:text-slate-400">
             Start by adding your first transaction.
           </p>
           {user ? (
-            <p>
+            <p className="text-slate-600 dark:text-slate-400">
               Go to{" "}
               <Link
                 to="/add-transaction"
-                className="text-cyan-600 font-bold hover:underline"
+                className="text-[#0A9284] dark:text-[#0FB19D] font-bold hover:opacity-80 transition-opacity"
               >
                 Add Transaction
               </Link>
             </p>
           ) : (
-            <p>
+            <p className="text-slate-600 dark:text-slate-400">
               <Link
                 to="/login"
-                className="text-cyan-600 font-bold hover:underline"
+                className="text-[#0A9284] dark:text-[#0FB19D] font-bold hover:opacity-80 transition-opacity"
               >
                 Login
               </Link>{" "}
               or{" "}
               <Link
                 to="/register"
-                className="text-cyan-600 font-bold hover:underline"
+                className="text-[#0A9284] dark:text-[#0FB19D] font-bold hover:opacity-80 transition-opacity"
               >
                 Register
               </Link>{" "}
@@ -149,7 +149,7 @@ const MyTransactions = () => {
           {transactions.map((txn) => (
             <div
               key={txn._id}
-              className="bg-white dark:bg-[#0A0A0A] rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden"
+              className="bg-white dark:bg-slate-800 rounded-2xl shadow-md hover:shadow-2xl transition-transform transition-shadow duration-300 overflow-hidden border border-slate-200 dark:border-slate-700 hover:-translate-y-2"
             >
               <div
                 className={`p-4 rounded-t-2xl border-l-4 ${
@@ -168,12 +168,12 @@ const MyTransactions = () => {
                   >
                     {txn.type}
                   </span>
-                  <span className="font-mono font-bold text-lg text-gray-700 dark:text-gray-300">
+                  <span className="font-mono font-bold text-lg text-slate-700 dark:text-slate-300">
                     {txn.type === "Income" ? "+" : "-"}$
                     {txn.amount.toLocaleString()}
                   </span>
                 </div>
-                <div className="space-y-2 text-gray-600 dark:text-gray-400">
+                <div className="space-y-2 text-slate-600 dark:text-slate-400">
                   <div className="flex justify-between">
                     <span>Category:</span>
                     <span className="font-medium">{txn.category}</span>
@@ -187,7 +187,7 @@ const MyTransactions = () => {
                 </div>
               </div>
 
-              <div className="p-4 bg-gray-50 dark:bg-[#051622] flex flex-col md:flex-row gap-2">
+              <div className="p-4 bg-slate-50 dark:bg-slate-900 flex flex-col md:flex-row gap-2">
                 <Link
                   to={`/my-transactions/${txn._id}`}
                   state={{ transaction: txn }}

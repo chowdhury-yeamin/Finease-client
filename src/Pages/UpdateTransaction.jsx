@@ -108,7 +108,7 @@ const UpdateTransaction = () => {
 
   if (loading) {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center text-gray-600">
+      <div className="min-h-[60vh] flex items-center justify-center text-slate-600 dark:text-slate-400">
         <span className="loading loading-spinner loading-xl"></span>
       </div>
     );
@@ -116,31 +116,31 @@ const UpdateTransaction = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <Link className="flex items-center text-blue-600" to="/my-transactions">
+      <Link className="flex items-center text-[#0A9284] dark:text-[#0FB19D] hover:opacity-80 transition-opacity" to="/my-transactions">
         <p className="">
           <MdOutlineArrowBack />
         </p>
         <p className="pl-1"> Back</p>
       </Link>
-      <h1 className="text-3xl font-bold text-center mb-8 text-blue-600">
+      <h1 className="text-3xl font-bold text-center mb-8 bg-gradient-to-r from-[#0A9284] to-[#0FB19D] bg-clip-text text-transparent">
         Update Transaction
       </h1>
 
       <form
         onSubmit={handleSubmit}
-        className="bg-white shadow-xl rounded-lg p-8"
+        className="bg-white dark:bg-slate-800 shadow-xl rounded-lg p-8 border border-slate-200 dark:border-slate-700"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Transaction Type */}
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-2">
               Transaction Type
             </label>
             <select
               name="type"
               value={formData.type}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full p-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-[#0A9284] focus:border-[#0A9284]"
               required
             >
               <option value="Income">Income</option>
@@ -150,14 +150,14 @@ const UpdateTransaction = () => {
 
           {/* Category */}
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-2">
               Category
             </label>
             <select
               name="category"
               value={formData.category}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full p-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-[#0A9284] focus:border-[#0A9284]"
               required
             >
               <option value="">Select Category</option>
@@ -171,7 +171,7 @@ const UpdateTransaction = () => {
 
           {/* Amount */}
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-2">
               Amount
             </label>
             <input
@@ -180,7 +180,7 @@ const UpdateTransaction = () => {
               value={formData.amount}
               onChange={handleChange}
               placeholder="Enter amount"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full p-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-[#0A9284] focus:border-[#0A9284]"
               required
               min="0"
               step="0.01"
@@ -189,7 +189,7 @@ const UpdateTransaction = () => {
 
           {/* Date */}
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-2">
               Date
             </label>
             <input
@@ -197,14 +197,14 @@ const UpdateTransaction = () => {
               name="date"
               value={formData.date}
               onChange={handleChange}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full p-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-[#0A9284] focus:border-[#0A9284]"
               required
             />
           </div>
 
           {/* Description */}
           <div className="md:col-span-2">
-            <label className="block text-gray-700 font-semibold mb-2">
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-2">
               Description
             </label>
             <textarea
@@ -213,33 +213,33 @@ const UpdateTransaction = () => {
               onChange={handleChange}
               placeholder="Enter transaction description"
               rows="3"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full p-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:ring-2 focus:ring-[#0A9284] focus:border-[#0A9284]"
               required
             ></textarea>
           </div>
 
           {/* User Info */}
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-2">
               User Email
             </label>
             <input
               type="email"
               value={user?.email || ""}
               readOnly
-              className="w-full p-3 bg-gray-100 border border-gray-300 rounded-lg"
+              className="w-full p-3 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white"
             />
           </div>
 
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">
+            <label className="block text-slate-700 dark:text-slate-300 font-semibold mb-2">
               User Name
             </label>
             <input
               type="text"
               value={user?.displayName || ""}
               readOnly
-              className="w-full p-3 bg-gray-100 border border-gray-300 rounded-lg"
+              className="w-full p-3 bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white"
             />
           </div>
         </div>
@@ -248,7 +248,7 @@ const UpdateTransaction = () => {
         <div className="mt-8 flex justify-center">
           <button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            className="bg-gradient-to-r from-[#0A9284] to-[#0FB19D] hover:opacity-90 text-white font-bold py-3 px-8 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#0FB19D]/50 focus:ring-opacity-50"
           >
             Update Transaction
           </button>

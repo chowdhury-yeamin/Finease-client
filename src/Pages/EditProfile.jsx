@@ -47,36 +47,36 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
-      <div className="bg-white shadow-2xl rounded-2xl p-8 max-w-lg w-full">
-        <h2 className="text-3xl font-bold text-center text-blue-600 mb-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 p-6">
+      <div className="bg-white dark:bg-slate-800 shadow-2xl rounded-2xl p-8 max-w-lg w-full border border-slate-200 dark:border-slate-700">
+        <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-[#0A9284] to-[#0FB19D] bg-clip-text text-transparent mb-8">
           Edit Your Profile
         </h2>
 
         <form onSubmit={handleUpdateProfile} className="space-y-6">
           <div>
-            <label className="block text-gray-700 font-medium mb-2">
+            <label className="block text-slate-700 dark:text-slate-300 font-medium mb-2">
               Full Name
             </label>
             <input
               type="text"
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              className="w-full border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-2 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-[#0A9284] focus:outline-none"
               placeholder="Enter your name"
               required
             />
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium mb-2">
+            <label className="block text-slate-700 dark:text-slate-300 font-medium mb-2">
               Photo URL
             </label>
             <input
               type="url"
               value={photoURL}
               onChange={(e) => setPhotoURL(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              className="w-full border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-2 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 focus:ring-2 focus:ring-[#0A9284] focus:outline-none"
               placeholder="Paste your photo link"
             />
           </div>
@@ -86,7 +86,7 @@ const EditProfile = () => {
               <img
                 src={photoURL}
                 alt="Preview"
-                className="w-32 h-32 rounded-full object-cover border-4 border-blue-500 shadow-lg"
+                className="w-32 h-32 rounded-full object-cover border-4 border-[#0A9284] dark:border-[#0FB19D] shadow-lg"
               />
             </div>
           )}
@@ -97,7 +97,7 @@ const EditProfile = () => {
               href="/"
               type="button"
               onClick={() => navigate("/profile")}
-              className="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition"
+              className="px-6 py-2 bg-slate-300 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-400 dark:hover:bg-slate-600 transition"
             >
               Cancel
             </button>
@@ -107,8 +107,8 @@ const EditProfile = () => {
               disabled={loading}
               className={`px-6 py-2 rounded-lg text-white font-semibold ${
                 loading
-                  ? "bg-blue-400 cursor-not-allowed"
-                  : "bg-blue-600 hover:bg-blue-700"
+                  ? "bg-slate-400 cursor-not-allowed"
+                  : "bg-gradient-to-r from-[#0A9284] to-[#0FB19D] hover:opacity-90"
               } transition`}
             >
               {loading ? "Updating..." : "Save Changes"}

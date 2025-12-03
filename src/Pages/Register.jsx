@@ -103,7 +103,7 @@ const Register = () => {
   };
 
   return (
-    <div className="card bg-base-100  w-full mx-auto max-w-sm shrink-0 shadow-2xl border border-gray-200 my-8">
+    <div className="card bg-white dark:bg-slate-800 w-full mx-auto max-w-sm shrink-0 shadow-2xl border border-slate-200 dark:border-slate-700 my-8">
       <div className="card-body">
         <h1 className="text-3xl font-bold text-center">Register</h1>
         <form onSubmit={handleRegister}>
@@ -145,7 +145,7 @@ const Register = () => {
 
             <button
               disabled={isLoading}
-              className="btn text-white mt-4 rounded-full bg-blue-600 hover:bg-blue-800"
+              className="btn text-white mt-4 rounded-full bg-gradient-to-r from-[#0A9284] to-[#0FB19D] hover:opacity-90 transition-opacity"
             >
               {isLoading ? "Registering..." : "Register"}
             </button>
@@ -154,15 +154,15 @@ const Register = () => {
 
         <button
           onClick={handleGoogleSignIn}
-          className="btn bg-white rounded-full text-black border-[#e5e5e5] hover:bg-gray-200"
+          className="btn bg-white dark:bg-slate-700 rounded-full text-slate-800 dark:text-slate-100 border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-600"
         >
           <FcGoogle />
           Register with Google
         </button>
-        <p className="text-center">
+        <p className="text-center text-slate-600 dark:text-slate-400">
           Already have an account?{" "}
           <Link
-            className="text-blue-500 font-bold  hover:text-blue-800 hover:text-underline"
+            className="text-[#0A9284] dark:text-[#0FB19D] hover:opacity-80 font-bold transition-opacity"
             to="/login"
           >
             Login

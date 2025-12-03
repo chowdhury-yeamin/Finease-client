@@ -12,9 +12,12 @@ import UpdateTransaction from "../Pages/UpdateTransaction";
 import About from "../Pages/About";
 import MyProfile from "../Pages/MyProfile";
 import ErrorPage from "../Pages/ErrorPage";
-import { Edit } from "lucide-react";
 import EditProfile from "../Pages/EditProfile";
 import Terms from "../Pages/Terms";
+import AllItems from "../Pages/AllItems";
+import ItemDetails from "../Pages/ItemDetails";
+import Contact from "../Pages/Contact";
+import Support from "../Pages/Support";
 
 const router = createBrowserRouter([
   {
@@ -55,8 +58,24 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/all-items",
+        element: <AllItems></AllItems>,
+      },
+      {
+        path: "/item-details/:id",
+        element: <ItemDetails></ItemDetails>,
+      },
+      {
         path: "/about",
         element: <About></About>,
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
+      },
+      {
+        path: "/support",
+        element: <Support></Support>,
       },
       {
         path: "/my-profile",
