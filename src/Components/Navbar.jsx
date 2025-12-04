@@ -69,22 +69,7 @@ const Navbar = () => {
 
               {!user ? (
                 <>
-                  <NavLink
-                    to="/login"
-                    className={({ isActive }) =>
-                      isActive ? activeClass : normalClass
-                    }
-                  >
-                    Login
-                  </NavLink>
-                  <NavLink
-                    to="/register"
-                    className={({ isActive }) =>
-                      isActive ? activeClass : normalClass
-                    }
-                  >
-                    Register
-                  </NavLink>
+                  
                 </>
               ) : (
                 <>
